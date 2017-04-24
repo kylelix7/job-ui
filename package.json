@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "webpack-dev-server": "^2.4.4"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
