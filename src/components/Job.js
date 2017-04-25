@@ -1,8 +1,26 @@
 import React from "react";
+import td_logo from "../assets/TD.jpg"
+import bmo_logo from "../assets/BMO.jpg"
+import scotia_logo from "../assets/Scotiabank.jpg"
+import rbc_logo from "../assets/RBC.jpg"
 
 class JobRow extends React.Component {
+  selectImage(bank) {
+    if(bank == "TD") {
+      return td_logo;
+    } else if(bank == "BMO") {
+      return bmo_logo;
+    } else if(bank == "Scotiabank") {
+      return scotia_logo;
+    } else if(bank == "RBC") {
+      return rbc_logo;
+    } else {
+      return "";
+    }
+  }
   render() {
-    return <tr><th><img src="<%= asset_url('assets/TD.jpg') %>" alt="bank logo" height="42" width="42" />{this.props.title}</th></tr>;
+    var logo = this.selectImage("Scotiabank");
+    return <tr><th><img src={logo} alt="bank logo" height="42" width="42" />{this.props.title}</th></tr>;
   }
 }
 
