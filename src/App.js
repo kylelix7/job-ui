@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import JobMaster from './components/JobMaster';
+import {FilterableJobTable} from './components/Job';
+import {JOBS} from './components/Job';
 import './App.css';
 
 class App extends Component {
   render() {
+    console.log(JOBS);
+    //return (<Dummy />);
+    return (<FilterableJobTable jobs={JOBS} />);
+    /*
     return (
       <div className="App">
         <div className="App-header">
@@ -16,6 +21,7 @@ class App extends Component {
         </p>
       </div>
     );
+    */
   }
 }
 
