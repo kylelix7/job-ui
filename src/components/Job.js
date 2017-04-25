@@ -2,7 +2,7 @@ import React from "react";
 
 class JobRow extends React.Component {
   render() {
-    return <tr><th>{this.props.title}</th></tr>;
+    return <tr><th><img src="<%= asset_url('assets/TD.jpg') %>" alt="bank logo" height="42" width="42" />{this.props.title}</th></tr>;
   }
 }
 
