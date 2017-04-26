@@ -19,7 +19,7 @@ class JobRow extends React.Component {
     }
   }
   render() {
-    var logo = this.selectImage("Scotiabank");
+    var logo = this.selectImage(this.props.company);
     return <tr><th><img src={logo} alt="bank logo" height="42" width="42" />{this.props.title}</th></tr>;
   }
 }
@@ -28,7 +28,7 @@ class JobTable extends React.Component {
   render() {
     var rows = [];
     this.props.jobs.forEach(function(job) {
-      rows.push(<JobRow title={job.title} key={job.id}/>);
+      rows.push(<JobRow title={job.title} company={job.company} key={job.id}/>);
     });
     return (
       <table>
@@ -56,12 +56,6 @@ export class FilterableJobTable extends React.Component {
         <JobTable jobs={this.props.jobs} />
       </div>
     );
-  }
-}
-
-class Dummy extends React.Component {
-  render() {
-    return (<p> hello </p>);
   }
 }
 
