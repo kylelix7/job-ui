@@ -24,7 +24,7 @@ class JobRow extends React.Component {
   }
 }
 
-class JobTable extends React.Component {
+class JobList extends React.Component {
   render() {
     var rows = [];
     this.props.jobs.forEach(function(job) {
@@ -53,7 +53,7 @@ export class FilterableJobTable extends React.Component {
     return (
       <div>
         <SearchBar />
-        <JobTable jobs={this.props.jobs} />
+        <JobList jobs={this.props.jobs} />
       </div>
     );
   }
