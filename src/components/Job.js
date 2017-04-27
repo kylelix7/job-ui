@@ -3,16 +3,27 @@ import td_logo from "../assets/TD.jpg"
 import bmo_logo from "../assets/BMO.jpg"
 import scotia_logo from "../assets/Scotiabank.jpg"
 import rbc_logo from "../assets/RBC.jpg"
+import Button from 'react-bootstrap/lib/Button';
+
+export const JOBS = [
+  {title: "software developer", company: "TD", id: "TD1"},
+  {title: "software engineer", company: "Scotiabank", id: "Scotiabank1"},
+  {title: "blockchain develoer", company: "BMO", id: "Bmo1"},
+  {title: "UI/UX designer", company: "RBC", id: "RBC1"},
+  {title: "project manager", company: "TD", id: "TD2"}
+];
+
+export const SKILLS = ['Java', 'SQL', 'JS', 'Machine Learning', 'Agile'];
 
 class JobRow extends React.Component {
   selectImage(bank) {
-    if(bank == "TD") {
+    if(bank === "TD") {
       return td_logo;
-    } else if(bank == "BMO") {
+    } else if(bank === "BMO") {
       return bmo_logo;
-    } else if(bank == "Scotiabank") {
+    } else if(bank === "Scotiabank") {
       return scotia_logo;
-    } else if(bank == "RBC") {
+    } else if(bank === "RBC") {
       return rbc_logo;
     } else {
       return "";
@@ -48,22 +59,24 @@ class SearchBar extends React.Component {
   }
 }
 
+class JobFileterTagList extends React.Component {
+  render() {
+    var all_buttons = SKILLS.map(function(str) {
+      return <Button key={str}> {str} </Button>;
+    });
+    return <div> {all_buttons} </div>
+  }
+}
+
 export class FilterableJobTable extends React.Component {
   render() {
     return (
       <div>
         <SearchBar />
+        <JobFileterTagList />
         <JobList jobs={this.props.jobs} />
       </div>
     );
   }
 }
-
-export const JOBS = [
-  {title: "software developer", company: "TD", id: "TD1"},
-  {title: "software engineer", company: "Scotiabank", id: "Scotiabank1"},
-  {title: "blockchain develoer", company: "BMO", id: "Bmo1"},
-  {title: "UI/UX designer", company: "RBC", id: "RBC1"},
-  {title: "project manager", company: "TD", id: "TD2"}
-];
 

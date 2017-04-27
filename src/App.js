@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import {FilterableJobTable} from './components/Job';
 import {JOBS} from './components/Job';
 import './App.css';
 
 class App extends Component {
   render() {
-    console.log(JOBS);
     //return (<Dummy />);
     return (<FilterableJobTable jobs={JOBS} />);
     /*
