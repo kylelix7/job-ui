@@ -11,16 +11,10 @@ const mapStateToProps = (state) => ({
   jobs: getVisibleJobs(state.jobs, state.filter)
 })
 
-const mapDispatchToProps = {
-  onJobClick: (job) => {
-    dispatch(clickJob(job));
-  }
-}
-
 const VisibleJobList = connect(
   mapStateToProps,
-  mapDispatchToProps
-)(JobList)
+  null,
+)(JobList);
 
 export default VisibleJobList;
 
