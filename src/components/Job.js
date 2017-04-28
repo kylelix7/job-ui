@@ -4,6 +4,7 @@ import bmo_logo from "../assets/BMO.jpg"
 import scotia_logo from "../assets/Scotiabank.jpg"
 import rbc_logo from "../assets/RBC.jpg"
 import Button from 'react-bootstrap/lib/Button';
+import { skills } from '../constants/constants';
 
 export const JOBS = [
   {title: "software developer", company: "TD", id: "TD1"},
@@ -12,8 +13,6 @@ export const JOBS = [
   {title: "UI/UX designer", company: "RBC", id: "RBC1"},
   {title: "project manager", company: "TD", id: "TD2"}
 ];
-
-export const SKILLS = ['Java', 'SQL', 'JS', 'Machine Learning', 'Agile'];
 
 class JobRow extends React.Component {
   selectImage(bank) {
@@ -61,8 +60,9 @@ class SearchBar extends React.Component {
 
 class JobFileterTagList extends React.Component {
   render() {
-    var all_buttons = SKILLS.map(function(str) {
-      return <Button key={str}> {str} </Button>;
+    var all_buttons = skills.map(function(str) {
+      var style = {margin: '5px'};
+      return <Button key={str} className='btn-xs' style={style}> {str} </Button>;
     });
     return <div> {all_buttons} </div>
   }
