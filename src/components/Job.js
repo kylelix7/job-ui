@@ -30,7 +30,15 @@ class JobRow extends React.Component {
   }
   render() {
     var logo = this.selectImage(this.props.company);
-    return <tr><th><img src={logo} alt="bank logo" height="42" width="42" />{this.props.title}</th></tr>;
+    var style = {margin: '10px'};
+    return (
+      <tr>
+        <th>
+          <Button className='btn-xs' disabled> Java </Button>
+          <img src={logo} style={style} alt="bank logo" height="42" width="42" />
+          <a href='https://google.com'>{this.props.title}</a>
+        </th>
+      </tr>);
   }
 }
 
