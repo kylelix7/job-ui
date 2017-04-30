@@ -12,7 +12,8 @@ export const receiveJobs = (json) => ({
   jobs: json
 });
 
-const fetchJobs = filter => dispatch => {
+export const fetchJobs = filter => dispatch => {
+  console.log('fetchJobs in actions');
   dispatch(requestJobs(filter));
   return fetch("http://localhost:8080/api/jobs")
     .then(response => response.json())
