@@ -36,7 +36,7 @@ class JobRow extends React.Component {
         <th>
           <Button className='btn-xs' disabled> Java </Button>
           <img src={logo} style={style} alt="bank logo" height="42" width="42" />
-          <a href='https://google.com'>{this.props.title}</a>
+          <a href={this.props.link} target="_blank">{this.props.title}</a>
         </th>
       </tr>);
   }
@@ -47,7 +47,7 @@ class JobList extends React.Component {
     var rows = [];
       if (this.props.jobs) {
       this.props.jobs.forEach(function(job) {
-        rows.push(<JobRow title={job.title} company={job.company} key={job.id}/>);
+        rows.push(<JobRow title={job.title} company={job.company} link={job.link} key={job.id}/>);
       });
     }
     return (
