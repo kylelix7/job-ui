@@ -13,7 +13,12 @@ const reducer = (state, action) => {
   switch (action.type) {
     case REQUEST_JOBS:
     case RECEIVE_JOBS:
-      return [];
+      console.log('reducer - action: ');
+      console.log(action.type);
+      console.log(action);
+      var result = {...state, jobs: action.jobs};
+      console.log(result);
+      return result;
     default:
       return {...state};
   }

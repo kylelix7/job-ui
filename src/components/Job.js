@@ -45,9 +45,11 @@ class JobRow extends React.Component {
 class JobList extends React.Component {
   render() {
     var rows = [];
-    this.props.jobs.forEach(function(job) {
-      rows.push(<JobRow title={job.title} company={job.company} key={job.id}/>);
-    });
+      if (this.props.jobs) {
+      this.props.jobs.forEach(function(job) {
+        rows.push(<JobRow title={job.title} company={job.company} key={job.id}/>);
+      });
+    }
     return (
       <table>
         <tbody>{rows}</tbody>
