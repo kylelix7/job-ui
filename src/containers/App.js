@@ -6,10 +6,12 @@ import { FilterableJobTable } from '../components/Job';
 
 class App extends React.Component {
   static propTypes = {
-//    jobs: PropTypes.array.isRequired,
-    isFetching: PropTypes.bool.isRequired,
+    jobs: PropTypes.array,
+    isFetching: PropTypes.bool,
 //    dispatch: PropTypes.func.isRequired,
-    keyword: PropTypes.string.isRequired
+    keyword: PropTypes.string,
+    activePage: PropTypes.number,
+    totalPages: PropTypes.number
   }
 
   componentDidMount() {
@@ -22,9 +24,7 @@ class App extends React.Component {
   } 
 
   render() {
-    console.log('render()');
-    console.log(this.props.jobs);
-    return <FilterableJobTable jobs={this.props.jobs} />;
+    return <FilterableJobTable jobs={this.props.jobs} totalPages={this.props.totalPages} />;
   }
 }
 
@@ -34,6 +34,7 @@ const mapStateToProps = state => {
   console.log(state.reducer.jobs);
   return {
     jobs: state.reducer.jobs,
+    totalPages: state.reducer.totalPages,
     isFetching: false,
     //dispatch: function(){console.log('abcd')},
     keyword: ''

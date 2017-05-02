@@ -13,11 +13,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case REQUEST_JOBS:
     case RECEIVE_JOBS:
-      console.log('reducer - action: ');
-      console.log(action.type);
-      console.log(action);
-      var result = {...state, jobs: action.jobs};
-      console.log(result);
+      var totalPages = action.count / 20;
+      var result = {...state, jobs: action.jobs, totalPages: totalPages};
       return result;
     default:
       return {...state};

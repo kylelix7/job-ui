@@ -4,6 +4,7 @@ import bmo_logo from "../assets/BMO.jpg"
 import scotia_logo from "../assets/Scotiabank.jpg"
 import rbc_logo from "../assets/RBC.jpg"
 import Button from 'react-bootstrap/lib/Button';
+import Pagination from 'react-bootstrap/lib/Pagination';
 import { skills } from '../constants/constants';
 
 export const JOBS = [
@@ -80,11 +81,18 @@ class JobFileterTagList extends React.Component {
 
 export class FilterableJobTable extends React.Component {
   render() {
+    console.log('render in FilterableJobTable');
+    console.log(this.props);
     return (
       <div>
         <SearchBar />
         <JobFileterTagList />
         <JobList jobs={this.props.jobs} />
+        <Pagination
+          bsSize="small"
+          items={this.props.totalPages}
+          activePage={2}
+           />
       </div>
     );
   }
