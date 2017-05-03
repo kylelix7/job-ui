@@ -14,10 +14,12 @@ const reducer = (state, action) => {
   switch (action.type) {
     case REQUEST_JOBS:
     case RECEIVE_JOBS:
-      var totalPages = action.count / 20;
+      var count = action.count || 0;
+      var totalPages = Math.ceil (action.count / 20);
       var result = {...state, jobs: action.jobs, totalPages: totalPages};
       return result;
     case SELECT_PAGE:
+      var currentPage = action.currentPage || 1;
       return {...state, currentPage: action.currentPage};
     default:
       return {...state};

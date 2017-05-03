@@ -24,7 +24,7 @@ export const fetchJobs = filter => dispatch => {
   dispatch(requestJobs(filter));
   var url = "http://localhost:8080/api/jobs"; 
   if (filter.currentPage) {
-    url = url + '?page=' + filter.currentPage;
+    url = url + '?page=' + (parseInt(filter.currentPage) - 1);
   }
   return fetch(url)
     .then(response => response.json())
