@@ -80,9 +80,11 @@ class JobFileterTagList extends React.Component {
 }
 
 export class FilterableJobTable extends React.Component {
+
   render() {
     console.log('render in FilterableJobTable');
     console.log(this.props);
+    var currentPage = this.props.currentPage || 1;
     return (
       <div>
         <SearchBar />
@@ -91,8 +93,8 @@ export class FilterableJobTable extends React.Component {
         <Pagination
           bsSize="small"
           items={this.props.totalPages}
-          activePage={2}
-           />
+          activePage={currentPage}
+          onSelect={this.props.handleSelect} />
       </div>
     );
   }

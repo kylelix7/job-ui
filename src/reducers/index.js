@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 
 import { 
-  REQUEST_JOBS, RECEIVE_JOBS
+  REQUEST_JOBS, RECEIVE_JOBS,
+  SELECT_PAGE
 } from '../actions';
 
 const initialState = {
@@ -16,6 +17,8 @@ const reducer = (state, action) => {
       var totalPages = action.count / 20;
       var result = {...state, jobs: action.jobs, totalPages: totalPages};
       return result;
+    case SELECT_PAGE:
+      return {...state, currentPage: action.currentPage};
     default:
       return {...state};
   }

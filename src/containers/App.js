@@ -5,13 +5,19 @@ import { connect } from 'react-redux';
 import { FilterableJobTable } from '../components/Job';
 
 class App extends React.Component {
+  constructor (props){
+    super(props);
+    this.handleSelect = this.handleSelect.bind(this);
+  
+  }
   static propTypes = {
     jobs: PropTypes.array,
     isFetching: PropTypes.bool,
 //    dispatch: PropTypes.func.isRequired,
     keyword: PropTypes.string,
     activePage: PropTypes.number,
-    totalPages: PropTypes.number
+    totalPages: PropTypes.number,
+    currentPage: PropTypes.number
   }
 
   componentDidMount() {
@@ -23,8 +29,13 @@ class App extends React.Component {
   componentWillReceiveProps(nextProps) {
   } 
 
+  handleSelect(page) {
+    const { dispatch } = this.props;
+    dispatch(fetchJobs({currentPage: page}));
+  }
+
   render() {
-    return <FilterableJobTable jobs={this.props.jobs} totalPages={this.props.totalPages} />;
+    return <FilterableJobTable jobs={this.props.jobs} totalPages={this.props.totalPages} handleSelect={this.handleSelect} currentPage={this.props.currentPage} />;
   }
 }
 
@@ -35,8 +46,8 @@ const mapStateToProps = state => {
   return {
     jobs: state.reducer.jobs,
     totalPages: state.reducer.totalPages,
+    currentPage: state.reducer.currentPage,
     isFetching: false,
-    //dispatch: function(){console.log('abcd')},
     keyword: ''
   };
 }
