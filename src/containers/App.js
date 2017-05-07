@@ -4,6 +4,8 @@ import { fetchJobs, selectPage } from '../actions';
 import { connect } from 'react-redux';
 import { FilterableJobTable } from '../components/Job';
 import { JobPieChart } from '../components/Report';
+import { Tabs, Tab } from 'react-bootstrap';
+
 
 class App extends React.Component {
   constructor (props){
@@ -36,12 +38,18 @@ class App extends React.Component {
 
   render() {
     return (
-      <div> 
-        <FilterableJobTable jobs={this.props.jobs} 
+      <div className="panel panel-default">
+        <Tabs defaultActiveKey={1} id="nav-tab">
+          <Tab eventKey={1} title="Jobs and Skills">
+            <FilterableJobTable jobs={this.props.jobs} 
                             totalPages={this.props.totalPages} 
                             handleSelect={this.handleSelect} 
                             currentPage={this.props.currentPage} />
-        <JobPieChart />
+          </Tab>
+          <Tab eventKey={2} title="Report">
+            <JobPieChart />
+          </Tab>
+        </Tabs>
       </div>
     );
   }
