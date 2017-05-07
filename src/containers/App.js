@@ -1,18 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { fetchJobs, selectPage } from '../actions';
-import { connect } from 'react-redux';
-import { FilterableJobTable } from '../components/Job';
-import { JobPieChart } from '../components/Report';
-import { Tabs, Tab } from 'react-bootstrap';
+import React from "react";
+import PropTypes from "prop-types";
+import {fetchJobs, selectPage} from "../actions";
+import {connect} from "react-redux";
+import {FilterableJobTable} from "../components/Job";
+import {JobPieChart} from "../components/Report";
+import {Tab, Tabs} from "react-bootstrap";
 
 
 class App extends React.Component {
-  constructor (props){
+  constructor(props) {
     super(props);
     this.handleSelect = this.handleSelect.bind(this);
-  
+
   }
+
   static propTypes = {
     jobs: PropTypes.array,
     isFetching: PropTypes.bool,
@@ -20,18 +21,18 @@ class App extends React.Component {
     activePage: PropTypes.number,
     totalPages: PropTypes.number,
     currentPage: PropTypes.number
-  }
+  };
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const {dispatch} = this.props;
     dispatch(fetchJobs({}));
   }
 
   componentWillReceiveProps(nextProps) {
-  } 
+  }
 
   handleSelect(page) {
-    const { dispatch } = this.props;
+    const {dispatch} = this.props;
     dispatch(fetchJobs({currentPage: page}));
     dispatch(selectPage(page));
   }
@@ -41,10 +42,10 @@ class App extends React.Component {
       <div className="panel panel-default">
         <Tabs defaultActiveKey={1} id="nav-tab">
           <Tab eventKey={1} title="Jobs and Skills">
-            <FilterableJobTable jobs={this.props.jobs} 
-                            totalPages={this.props.totalPages} 
-                            handleSelect={this.handleSelect} 
-                            currentPage={this.props.currentPage} />
+            <FilterableJobTable jobs={this.props.jobs}
+                                totalPages={this.props.totalPages}
+                                handleSelect={this.handleSelect}
+                                currentPage={this.props.currentPage}/>
           </Tab>
           <Tab eventKey={2} title="Report">
             <JobPieChart />
@@ -64,6 +65,6 @@ const mapStateToProps = state => {
     isFetching: false,
     keyword: ''
   };
-}
+};
 
 export default connect(mapStateToProps)(App);

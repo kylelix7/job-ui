@@ -22,7 +22,7 @@ export const selectPage = (currentPage) => ({
 export const fetchJobs = filter => dispatch => {
   console.log('fetchJobs in actions');
   dispatch(requestJobs(filter));
-  var url = "http://localhost:8080/api/jobs"; 
+  var url = "http://localhost:8080/api/jobs";
   if (filter.currentPage) {
     url = url + '?page=' + (parseInt(filter.currentPage) - 1);
   }

@@ -1,14 +1,6 @@
 import React from "react";
-import td_logo from "../assets/TD.jpg"
-import bmo_logo from "../assets/BMO.jpg"
-import scotia_logo from "../assets/Scotiabank.jpg"
-import rbc_logo from "../assets/RBC.jpg"
-import Button from 'react-bootstrap/lib/Button';
-import Pagination from 'react-bootstrap/lib/Pagination';
-import Pager from 'react-bootstrap/lib/Pager';
-import { skills } from '../constants/constants';
-import { PieChart, Pie, Legend, Cell, Tooltip, ResponsiveContainer, Sector } from 'recharts';
-import { scaleOrdinal, schemeCategory10 } from 'd3-scale';
+import {Cell, Legend, Pie, PieChart, Tooltip} from "recharts";
+import {scaleOrdinal, schemeCategory10} from "d3-scale";
 
 export class JobPieChart extends React.Component {
   render() {
@@ -23,7 +15,8 @@ export class JobPieChart extends React.Component {
             <Pie cx={200} cy={200} outerRadius={80} label>
               {
                 top10Skills.map((entry, index) => (
-                  <Cell key={`slice-${index}`} name={entry.name} value={entry.value} fill={colors[index % 10]}/>
+                  <Cell key={`slice-${index}`} name={entry.name} value={entry.value}
+                        fill={colors[index % 10]}/>
                 ))
               }
             </Pie>

@@ -1,5 +1,4 @@
-import React from 'react';
-import JobMaster from './JobMaster';
+import React from "react";
 
 class JobList extends React.Component {
   constructor() {
