@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { fetchJobs, selectPage } from '../actions';
 import { connect } from 'react-redux';
 import { FilterableJobTable } from '../components/Job';
+import { JobPieChart } from '../components/Report';
 
 class App extends React.Component {
   constructor (props){
@@ -34,7 +35,15 @@ class App extends React.Component {
   }
 
   render() {
-    return <FilterableJobTable jobs={this.props.jobs} totalPages={this.props.totalPages} handleSelect={this.handleSelect} currentPage={this.props.currentPage} />;
+    return (
+      <div> 
+        <FilterableJobTable jobs={this.props.jobs} 
+                            totalPages={this.props.totalPages} 
+                            handleSelect={this.handleSelect} 
+                            currentPage={this.props.currentPage} />
+        <JobPieChart />
+      </div>
+    );
   }
 }
 

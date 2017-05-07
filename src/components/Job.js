@@ -5,7 +5,10 @@ import scotia_logo from "../assets/Scotiabank.jpg"
 import rbc_logo from "../assets/RBC.jpg"
 import Button from 'react-bootstrap/lib/Button';
 import Pagination from 'react-bootstrap/lib/Pagination';
+import Pager from 'react-bootstrap/lib/Pager';
 import { skills } from '../constants/constants';
+import { PieChart, Pie, Legend, Cell, Tooltip, ResponsiveContainer, Sector } from 'recharts';
+import { scaleOrdinal, schemeCategory10 } from 'd3-scale';
 
 export const JOBS = [
   {title: "software developer", company: "TD", id: "TD1"},
@@ -79,6 +82,74 @@ class JobFileterTagList extends React.Component {
   }
 }
 
+class JobPieChart extends React.Component {
+  render() {
+    const colors = scaleOrdinal(schemeCategory10).range();
+      const data01 = [
+        { name: 'Group A', value: 900, v: 89 },
+        { name: 'Group B', value: 300, v: 100 },
+        { name: 'Group C', value: null, v: 200 },
+        { name: 'Group D', value: 200, v: 20 },
+        { name: 'Group E', value: 278, v: 40 },
+        { name: 'Group F', value: 189, v: 60 },
+      ];
+      
+      const data02 = [
+        { name: 'Group A', value: 2400 },
+        { name: 'Group B', value: 4567 },
+        { name: 'Group C', value: 1398 },
+        { name: 'Group D', value: 9800 },
+        { name: 'Group E', value: 3908 },
+        { name: 'Group F', value: 4800 },
+      ];
+      
+      const data03 = [
+        { name: 'A1', value: 100 },
+        { name: 'A2', value: 300 },
+        { name: 'B1', value: 100 },
+        { name: 'B2', value: 80 },
+        { name: 'B3', value: 40 },
+        { name: 'B4', value: 30 },
+        { name: 'B5', value: 50 },
+        { name: 'C1', value: 100 },
+        { name: 'C2', value: 200 },
+        { name: 'D1', value: 150 },
+        { name: 'D2', value: 50 },
+        { name: 'E1', value: 200 },
+        { name: 'E2', value: 34 },
+        { name: 'E3', value: 44 },
+        { name: 'F1', value: 89 },
+        { name: 'F2', value: 49 },
+        { name: 'F3', value: 51 },
+      ];
+
+    return (
+        <div className="pie-chart-wrapper">
+          <PieChart width={800} height={400}>
+            <Legend />
+            <Tooltip />
+            <Pie cx={200} cy={200} outerRadius={80} label>
+              {
+                data01.map((entry, index) => (
+                  <Cell key={`slice-${index}`} name={entry.name} value={entry.value} fill={colors[index % 10]}/>
+                ))
+              }
+            </Pie>
+            <Pie cx={600} cy={200} startAngle={180} endAngle={-180} innerRadius={60} outerRadius={80}
+              label>
+              {
+                data02.map((entry, index) => (
+                  <Cell key={`slice-${index}`} name={entry.name} value={entry.value} fill={colors[index % 10]}/>
+                ))
+              }
+            </Pie>
+          </PieChart>
+        </div>
+
+    );
+  }
+}
+
 export class FilterableJobTable extends React.Component {
 
   render() {
@@ -90,11 +161,15 @@ export class FilterableJobTable extends React.Component {
         <SearchBar />
         <JobFileterTagList />
         <JobList jobs={this.props.jobs} />
-        <Pagination
-          bsSize="small"
-          items={this.props.totalPages}
-          activePage={currentPage}
-          onSelect={this.props.handleSelect} />
+          <Pagination
+            bsSize="small"
+            items={this.props.totalPages}
+            activePage={currentPage}
+            onSelect={this.props.handleSelect} />
+        <Pager>
+          <Pager.Item href="#">Previous</Pager.Item>
+          <Pager.Item href="#">Next</Pager.Item>
+        </Pager>
       </div>
     );
   }

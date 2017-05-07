@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "d3": "^4.8.0",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
+    "react-d3-basic": "^1.6.11",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
+    "recharts": "^0.22.4",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "webpack-dev-server": "^2.4.4"
