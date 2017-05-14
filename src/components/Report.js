@@ -4,9 +4,14 @@ import {scaleOrdinal, schemeCategory10} from "d3-scale";
 
 export class JobPieChart extends React.Component {
   render() {
-    if (this.props.top10) {
+    console.log('render in JobPieChart');
+    console.log(this.props.stats);
+    if(this.props.stats) {
+      var top10 = this.props.stats;
+      // TODO get top 10
+    }
+    if (top10) {
       const colors = scaleOrdinal(schemeCategory10).range();
-      const top10Skills = this.props.top10;
       return (
         <div className="pie-chart-wrapper">
           <PieChart width={800} height={400}>
@@ -14,7 +19,7 @@ export class JobPieChart extends React.Component {
             <Tooltip />
             <Pie cx={200} cy={200} outerRadius={80} label>
               {
-                top10Skills.map((entry, index) => (
+                top10.map((entry, index) => (
                   <Cell key={`slice-${index}`} name={entry.name} value={entry.value}
                         fill={colors[index % 10]}/>
                 ))

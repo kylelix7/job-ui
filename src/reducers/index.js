@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
 
-import {RECEIVE_JOBS, REQUEST_JOBS, SELECT_PAGE} from "../actions";
+import {RECEIVE_JOBS, REQUEST_JOBS, SELECT_PAGE, RECEIVE_STATS} from "../actions";
 
 const initialState = {
   keyword: '',
@@ -17,7 +17,9 @@ const reducer = (state, action) => {
       return result;
     case SELECT_PAGE:
       var currentPage = action.currentPage || 1;
-      return {...state, currentPage: action.currentPage};
+      return {...state, currentPage: currentPage};
+    case RECEIVE_STATS:
+      return {...state, stats: action.stats};
     default:
       return {...state};
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {fetchJobs, selectPage} from "../actions";
+import {fetchJobs, selectPage, fetchStats} from "../actions";
 import {connect} from "react-redux";
 import {FilterableJobTable} from "../components/Job";
 import {JobPieChart} from "../components/Report";
@@ -20,13 +20,14 @@ class App extends React.Component {
     keyword: PropTypes.string,
     activePage: PropTypes.number,
     totalPages: PropTypes.number,
-    currentPage: PropTypes.number
+    currentPage: PropTypes.number,
+    stats: PropTypes.array
   };
 
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch(fetchJobs({}));
-    // dispatch(fetchStats({}));
+    dispatch(fetchStats());
   }
 
   componentWillReceiveProps(nextProps) {
@@ -38,7 +39,8 @@ class App extends React.Component {
 
     // if currentPage is undefined and page is 0, skip
     // if currentPage is equal to page, skip
-    if (!(this.props.currentPage && this.props.currentPage == page) && !((!this.props.currentPage) && page == 0)) {
+    if (!(this.props.currentPage && this.props.currentPage === page)
+      && !((!this.props.currentPage) && page === 0)) {
       dispatch(fetchJobs({currentPage: page}));
       dispatch(selectPage(page));
     }
@@ -55,7 +57,7 @@ class App extends React.Component {
                                 currentPage={this.props.currentPage}/>
           </Tab>
           <Tab eventKey={2} title="Report">
-            <JobPieChart />
+            <JobPieChart stats={this.props.stats} />
           </Tab>
         </Tabs>
       </div>
@@ -65,10 +67,13 @@ class App extends React.Component {
 
 //[mapStateToProps(state, [ownProps]): stateProps] (Function): If this argument is specified, the new component will subscribe to Redux store updates. This means that any time the store is updated, mapStateToProps will be called. The results of mapStateToProps must be a plain object*, which will be merged into the component’s props. If you don't want to subscribe to store updates, pass null or undefined in place of mapStateToProps. If ownProps is specified as a second argument, its value will be the props passed to your component, and mapStateToProps will be additionally re-invoked whenever the component receives new props (e.g. if props received from a parent component have shallowly changed, and you use the ownProps argument, mapStateToProps is re-evaluated).
 const mapStateToProps = state => {
+  console.log('mapStateToProps');
+  console.log(state);
   return {
     jobs: state.reducer.jobs,
     totalPages: state.reducer.totalPages,
     currentPage: state.reducer.currentPage,
+    stats: state.reducer.stats,
     isFetching: false,
     keyword: ''
   };
