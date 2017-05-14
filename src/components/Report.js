@@ -7,8 +7,16 @@ export class JobPieChart extends React.Component {
     console.log('render in JobPieChart');
     console.log(this.props.stats);
     if(this.props.stats) {
-      var top10 = this.props.stats;
-      // TODO get top 10
+      var all = this.props.stats;
+      all.sort(function(a, b) {
+        if (a.value < b.value)
+          return 1;
+        if (a.value > b.value)
+          return -1;
+        return 0;
+      });
+      var top10 = all.slice(0, 11);
+
     }
     if (top10) {
       const colors = scaleOrdinal(schemeCategory10).range();
