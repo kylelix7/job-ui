@@ -21,7 +21,6 @@ export const selectPage = (currentPage) => ({
 
 export const fetchJobs = filter => dispatch => {
   console.log('fetchJobs in actions');
-  dispatch(requestJobs(filter));
   var url = "http://localhost:8080/api/jobs";
   if (filter.currentPage) {
     url = url + '?page=' + (parseInt(filter.currentPage) - 1);
@@ -30,3 +29,8 @@ export const fetchJobs = filter => dispatch => {
     .then(response => response.json())
     .then(json => dispatch(receiveJobs(json.jobs, json.count)));
 };
+
+export const fetchStats = filter => dispatch => {
+  console.log('fetchStatas in action');
+//  dispatch
+}; 

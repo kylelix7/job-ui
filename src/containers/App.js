@@ -26,6 +26,7 @@ class App extends React.Component {
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch(fetchJobs({}));
+    // dispatch(fetchStats({}));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,8 +34,14 @@ class App extends React.Component {
 
   handleSelect(page) {
     const {dispatch} = this.props;
-    dispatch(fetchJobs({currentPage: page}));
-    dispatch(selectPage(page));
+    console.log('handleSelect');
+
+    // if currentPage is undefined and page is 0, skip
+    // if currentPage is equal to page, skip
+    if (!(this.props.currentPage && this.props.currentPage == page) && !((!this.props.currentPage) && page == 0)) {
+      dispatch(fetchJobs({currentPage: page}));
+      dispatch(selectPage(page));
+    }
   }
 
   render() {
