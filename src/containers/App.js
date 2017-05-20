@@ -23,7 +23,7 @@ class App extends React.Component {
     stats: PropTypes.array,
     rbc_stats: PropTypes.array,
     td_stats: PropTypes.array,
-    scotia_stats: PropTypes.array,
+    scotiabank_stats: PropTypes.array,
     bmo_stats: PropTypes.array
   };
 
@@ -64,10 +64,18 @@ class App extends React.Component {
           </Tab>
           <Tab eventKey={2} title="Report">
             <JobPieChart stats={this.props.stats} company="All"/>
-            <JobPieChart stats={this.props.rbc_stats} company="RBC"/>
-            <JobPieChart stats={this.props.td_stats} company="TD"/>
-            <JobPieChart stats={this.props.scotia_stats} company="Scotiabank"/>
-            <JobPieChart stats={this.props.bmo_stats} company="BMO"/>
+            <table>
+              <tbody>
+              <tr>
+                <td><JobPieChart stats={this.props.rbc_stats} company="RBC"/></td>
+                <td><JobPieChart stats={this.props.td_stats} company="TD"/></td>
+              </tr>
+              <tr>
+                <td><JobPieChart stats={this.props.scotiabank_stats} company="Scotiabank"/></td>
+                <td><JobPieChart stats={this.props.bmo_stats} company="BMO"/></td>
+              </tr>
+              </tbody>
+            </table>
           </Tab>
         </Tabs>
       </div>
@@ -84,7 +92,7 @@ const mapStateToProps = state => {
     stats: state.reducer.stats,
     rbc_stats: state.reducer.rbc_stats,
     td_stats: state.reducer.td_stats,
-    scotia_stats: state.reducer.scotia_stats,
+    scotiabank_stats: state.reducer.scotiabank_stats,
     bmo_stats: state.reducer.bmo_stats,
     isFetching: false,
     keyword: ''
