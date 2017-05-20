@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {clickJob} from "../actions";
 
 const getVisibleJobs = (jobs, filter) => { // probably don't need jobs
-                                           // fetch data with filter
+  // fetch data with filter
   return null;
 };
 

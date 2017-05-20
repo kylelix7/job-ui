@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {fetchJobs, selectPage, fetchStats} from "../actions";
+import {fetchJobs, fetchStats, selectPage} from "../actions";
 import {connect} from "react-redux";
 import {FilterableJobTable} from "../components/Job";
 import {JobPieChart} from "../components/Report";
@@ -11,7 +11,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.handleSelect = this.handleSelect.bind(this);
-
   }
 
   static propTypes = {
@@ -21,13 +20,21 @@ class App extends React.Component {
     activePage: PropTypes.number,
     totalPages: PropTypes.number,
     currentPage: PropTypes.number,
-    stats: PropTypes.array
+    stats: PropTypes.array,
+    rbc_stats: PropTypes.array,
+    td_stats: PropTypes.array,
+    scotia_stats: PropTypes.array,
+    bmo_stats: PropTypes.array
   };
 
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch(fetchJobs({}));
     dispatch(fetchStats());
+    dispatch(fetchStats({'company': 'TD'}));
+    dispatch(fetchStats({'company': 'BMO'}));
+    dispatch(fetchStats({'company': 'RBC'}));
+    dispatch(fetchStats({'company': 'Scotiabank'}));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,7 +42,6 @@ class App extends React.Component {
 
   handleSelect(page) {
     const {dispatch} = this.props;
-    console.log('handleSelect');
 
     // if currentPage is undefined and page is 0, skip
     // if currentPage is equal to page, skip
@@ -57,7 +63,11 @@ class App extends React.Component {
                                 currentPage={this.props.currentPage}/>
           </Tab>
           <Tab eventKey={2} title="Report">
-            <JobPieChart stats={this.props.stats} />
+            <JobPieChart stats={this.props.stats} company="All"/>
+            <JobPieChart stats={this.props.rbc_stats} company="RBC"/>
+            <JobPieChart stats={this.props.td_stats} company="TD"/>
+            <JobPieChart stats={this.props.scotia_stats} company="Scotiabank"/>
+            <JobPieChart stats={this.props.bmo_stats} company="BMO"/>
           </Tab>
         </Tabs>
       </div>
@@ -67,13 +77,15 @@ class App extends React.Component {
 
 //[mapStateToProps(state, [ownProps]): stateProps] (Function): If this argument is specified, the new component will subscribe to Redux store updates. This means that any time the store is updated, mapStateToProps will be called. The results of mapStateToProps must be a plain object*, which will be merged into the component’s props. If you don't want to subscribe to store updates, pass null or undefined in place of mapStateToProps. If ownProps is specified as a second argument, its value will be the props passed to your component, and mapStateToProps will be additionally re-invoked whenever the component receives new props (e.g. if props received from a parent component have shallowly changed, and you use the ownProps argument, mapStateToProps is re-evaluated).
 const mapStateToProps = state => {
-  console.log('mapStateToProps');
-  console.log(state);
   return {
     jobs: state.reducer.jobs,
     totalPages: state.reducer.totalPages,
     currentPage: state.reducer.currentPage,
     stats: state.reducer.stats,
+    rbc_stats: state.reducer.rbc_stats,
+    td_stats: state.reducer.td_stats,
+    scotia_stats: state.reducer.scotia_stats,
+    bmo_stats: state.reducer.bmo_stats,
     isFetching: false,
     keyword: ''
   };

@@ -15,9 +15,10 @@ export const receiveJobs = (jobs, count) => ({
   count: count
 });
 
-export const receiveStats = stats => ({
+export const receiveStats = (stats, company) => ({
   type: RECEIVE_STATS,
-  stats: stats
+  stats: stats,
+  company: company
 });
 
 export const selectPage = (currentPage) => ({
@@ -26,7 +27,6 @@ export const selectPage = (currentPage) => ({
 });
 
 export const fetchJobs = filter => dispatch => {
-  console.log('fetchJobs in actions');
   var url = "http://localhost:8080/api/jobs";
   if (filter.currentPage) {
     url = url + '?page=' + (parseInt(filter.currentPage) - 1);
@@ -37,9 +37,16 @@ export const fetchJobs = filter => dispatch => {
 };
 
 export const fetchStats = filter => dispatch => {
-  console.log('fetchStatas in action');
   var url = "http://localhost:8080/api/stats";
-  return fetch(url)
+  var company = null;
+  if (filter && filter.company) {
+    company = filter.company;
+    url = url + '?company=' + company;
+  }
+
+  return fetch(url, {
+    method: 'GET'
+  })
     .then(response => response.json())
-    .then(json => dispatch(receiveStats(json)));
-}; 
+    .then(json => dispatch(receiveStats(json, company)));
+};

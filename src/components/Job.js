@@ -83,8 +83,6 @@ class JobFileterTagList extends React.Component {
 
 export class FilterableJobTable extends React.Component {
   render() {
-    console.log('render in FilterableJobTable');
-    console.log(this.props);
     var currentPage = this.props.currentPage || 1;
     return (
       <div>
