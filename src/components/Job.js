@@ -31,32 +31,53 @@ class JobRow extends React.Component {
     }
   }
 
+  getStyle(value) {
+    var styleRed = {"background-color": "#FF0000", "color": "#FFFFFF"};
+    var styleBlue = {"background-color": "#0000cd", "color": "#FFFFFF"};
+    var styleGreen = {"background-color": "#006400", "color": "#FFFFFF"};
+    if(value >= 5) {
+      return styleRed;
+    } else if (value >=2) {
+      return styleBlue;
+    } else {
+      return styleGreen;
+    }
+  }
   render() {
     var logo = this.selectImage(this.props.company);
-    var style = {margin: '10px'};
+    var style = {'margin': '10px'};
+    var divStyle = {'float': 'right'};
     var stats = this.props.stats;
-    var statsDiv = null
+    var statsDiv = null;
+
     if (stats && stats.length > 2) {
       var buttons = [];
       if (stats[0].value > 0) {
-        buttons.push(<Button className='btn-xs' disabled> {stats[0].name} {stats[0].value}</Button>);
+        buttons.push(<Button className='btn-xs' style={this.getStyle(stats[0].value)} disabled> {stats[0].name} {stats[0].value}</Button>);
       }
       if (stats[1].value > 0) {
-        buttons.push(<Button className='btn-xs' disabled> {stats[1].name} {stats[1].value}</Button>);
+        buttons.push(<Button className='btn-xs' style={this.getStyle(stats[1].value)} disabled> {stats[1].name} {stats[1].value}</Button>);
       }
       if (stats[2].value > 0) {
-        buttons.push(<Button className='btn-xs' disabled> {stats[2].name} {stats[2].value}</Button>);
+        buttons.push(<Button className='btn-xs' style={this.getStyle(stats[2].value)} disabled> {stats[2].name} {stats[2].value}</Button>);
       }
-      statsDiv = (<div>
+      statsDiv = (<div  style={divStyle}>
         {buttons}
       </div>)
     }
+    var titleStyle = {'float': 'left'};
+    var clearBothStyle = {'clear': 'both'};
     return (
       <tr>
         <th>
+          <div>
+          <div style={titleStyle}>
           <img src={logo} style={style} alt="bank logo" height="42" width="42"/>
-          <a href={this.props.link} target="_blank">{this.props.title}</a>
+          <a href={this.props.link} target="_blank" >{this.props.title}</a>
+          </div>
           { statsDiv }
+          <div style={clearBothStyle}></div>
+          </div>
         </th>
       </tr>);
   }
@@ -67,14 +88,12 @@ class JobList extends React.Component {
     var rows = [];
     if (this.props.jobs) {
       this.props.jobs.forEach(function (job) {
-        console.log("each job stats");
-        console.log(job.stats);
         rows.push(<JobRow title={job.title} company={job.company} link={job.link} key={job.id} stats={job.stats}/>);
       });
     }
     return (
       <table>
-        <tbody>{rows}</tbody>
+        <tbody><div containerStyle>{rows}</div></tbody>
       </table>
     );
   }

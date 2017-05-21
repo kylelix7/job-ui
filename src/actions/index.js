@@ -60,11 +60,19 @@ export const fetchJobs = filter => dispatch => {
         }
         jobStats = convertObjectElementsToArray(jobStats);
         jobStats.sort(function (a, b) {
+          if(a.value === b.value) {
+            return 0;
+          }
+          if(!a.value) {
+            return 1;
+          }
+          if(!b.value) {
+            return -1;
+          }
           if (a.value < b.value)
             return 1;
-          if (a.value > b.value)
+          else (a.value > b.value)
             return -1;
-          return 0;
         });
         jobs[i].stats = jobStats;
       }
