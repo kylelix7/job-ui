@@ -34,12 +34,29 @@ class JobRow extends React.Component {
   render() {
     var logo = this.selectImage(this.props.company);
     var style = {margin: '10px'};
+    var stats = this.props.stats;
+    var statsDiv = null
+    if (stats && stats.length > 2) {
+      var buttons = [];
+      if (stats[0].value > 0) {
+        buttons.push(<Button className='btn-xs' disabled> {stats[0].name} {stats[0].value}</Button>);
+      }
+      if (stats[1].value > 0) {
+        buttons.push(<Button className='btn-xs' disabled> {stats[1].name} {stats[1].value}</Button>);
+      }
+      if (stats[2].value > 0) {
+        buttons.push(<Button className='btn-xs' disabled> {stats[2].name} {stats[2].value}</Button>);
+      }
+      statsDiv = (<div>
+        {buttons}
+      </div>)
+    }
     return (
       <tr>
         <th>
-          <Button className='btn-xs' disabled> Java </Button>
           <img src={logo} style={style} alt="bank logo" height="42" width="42"/>
           <a href={this.props.link} target="_blank">{this.props.title}</a>
+          { statsDiv }
         </th>
       </tr>);
   }
@@ -50,6 +67,8 @@ class JobList extends React.Component {
     var rows = [];
     if (this.props.jobs) {
       this.props.jobs.forEach(function (job) {
+        console.log("each job stats");
+        console.log(job.stats);
         rows.push(<JobRow title={job.title} company={job.company} link={job.link} key={job.id} stats={job.stats}/>);
       });
     }
