@@ -13,6 +13,7 @@ function convertObjectElementsToArray(obj) {
   // need to get the actual object this way. monggose
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
+      key = key.replace(/-/g , ".")
       arr.push({name: key, value: obj[key]});
     }
   }

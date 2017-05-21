@@ -128,4 +128,16 @@ export const skills = [
   "Grunt",
   "Webpack",
   "DevOps",
-  "COBOL"];
+  "COBOL",
+  "Security",
+  "CCNA",
+  "CCNP",
+  "CCIE",
+  "CISSP",
+  "NetApp",
+  "MCData",
+  "EMC",
+  "Hitachi",
+  "UX",
+  "UI",
+  "blockchain"];
