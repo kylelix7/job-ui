@@ -53,16 +53,19 @@ class App extends React.Component {
   }
 
   render() {
+    var style = {
+      "margin": "20px 60px 20px 60px"
+    };
     return (
-      <div className="panel panel-default">
-        <Tabs defaultActiveKey={1} id="nav-tab">
-          <Tab eventKey={1} title="Jobs and Skills">
+      <div className="panel panel-default" >
+        <Tabs defaultActiveKey={1} id="nav-tab" style={style}>
+          <Tab eventKey={1} title="Jobs and Skills" style={style}>
             <FilterableJobTable jobs={this.props.jobs}
                                 totalPages={this.props.totalPages}
                                 handleSelect={this.handleSelect}
                                 currentPage={this.props.currentPage}/>
           </Tab>
-          <Tab eventKey={2} title="Report">
+          <Tab eventKey={2} title="Report" style={style}>
             <JobPieChart stats={this.props.stats} company="All"/>
             <table>
               <tbody>

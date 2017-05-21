@@ -50,7 +50,7 @@ class JobList extends React.Component {
     var rows = [];
     if (this.props.jobs) {
       this.props.jobs.forEach(function (job) {
-        rows.push(<JobRow title={job.title} company={job.company} link={job.link} key={job.id}/>);
+        rows.push(<JobRow title={job.title} company={job.company} link={job.link} key={job.id} stats={job.stats}/>);
       });
     }
     return (

@@ -2,11 +2,6 @@ import {combineReducers} from "redux";
 
 import {RECEIVE_JOBS, RECEIVE_STATS, REQUEST_JOBS, SELECT_PAGE} from "../actions";
 
-const initialState = {
-  keyword: '',
-  jobs: []
-};
-
 const reducer = (state, action) => {
   switch (action.type) {
     case REQUEST_JOBS:

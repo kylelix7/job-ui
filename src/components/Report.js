@@ -27,13 +27,18 @@ export class JobPieChart extends React.Component {
     var top10 = this.findTop10(this.props.stats);
     if (top10) {
       const colors = scaleOrdinal(schemeCategory10).range();
+      var style = {
+        "margin": "auto",
+        "width": "50%",
+        "padding": "10px"
+      };
       return (
         <div className="pie-chart-wrapper">
-          <h3>{this.props.company}</h3>
-          <PieChart width={800} height={400}>
+          <h4 style={style}>{this.props.company}</h4>
+          <PieChart style={style} width={800} height={400}>
             <Legend/>
             <Tooltip />
-            <Pie cx={200} cy={200} outerRadius={80} label>
+            <Pie cx={200} cy={200} outerRadius={80} innerRadius={40} label>
               {
                 top10.map((entry, index) => (
                   <Cell key={`slice-${index}`} name={entry.name} value={entry.value}
