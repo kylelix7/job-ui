@@ -5,7 +5,6 @@ import scotia_logo from "../assets/Scotiabank.jpg";
 import rbc_logo from "../assets/RBC.jpg";
 import Button from "react-bootstrap/lib/Button";
 import Pagination from "react-bootstrap/lib/Pagination";
-import Pager from "react-bootstrap/lib/Pager";
 import {skills} from "../constants/constants";
 
 export const JOBS = [
@@ -32,9 +31,9 @@ class JobRow extends React.Component {
   }
 
   getStyle(value) {
-    var styleRed = {"background-color": "#FF0000", "color": "#FFFFFF"};
-    var styleBlue = {"background-color": "#0000cd", "color": "#FFFFFF"};
-    var styleGreen = {"background-color": "#006400", "color": "#FFFFFF"};
+    var styleRed = {"backgroundColor": "#FF0000", "color": "#FFFFFF"};
+    var styleBlue = {"backgroundColor": "#0000cd", "color": "#FFFFFF"};
+    var styleGreen = {"backgroundColor": "#006400", "color": "#FFFFFF"};
     if (value >= 5) {
       return styleRed;
     } else if (value >= 2) {
@@ -51,20 +50,20 @@ class JobRow extends React.Component {
     var stats = this.props.stats;
     var statsDiv = null;
     var titleStyle = {'float': 'left'};
-    var containerStyle = {'width': '100%'};
+
 
     if (stats && stats.length > 2) {
       var buttons = [];
       if (stats[0].value > 0) {
-        buttons.push(<Button className='btn-xs'
+        buttons.push(<Button key={this.props.company + "top1"} className='btn-xs'
                              style={this.getStyle(stats[0].value)}> {stats[0].name} {stats[0].value}</Button>);
       }
       if (stats[1].value > 0) {
-        buttons.push(<Button className='btn-xs'
+        buttons.push(<Button key={this.props.company + "top2"} className='btn-xs'
                              style={this.getStyle(stats[1].value)}> {stats[1].name} {stats[1].value}</Button>);
       }
       if (stats[2].value > 0) {
-        buttons.push(<Button className='btn-xs'
+        buttons.push(<Button key={this.props.company + "top3"} className='btn-xs'
                              style={this.getStyle(stats[2].value)}> {stats[2].name} {stats[2].value}</Button>);
       }
       statsDiv = (<div style={divStyle}>
@@ -73,7 +72,7 @@ class JobRow extends React.Component {
     }
 
     return (
-      <tr style={containerStyle}>
+      <tr>
         <td >
           <div style={titleStyle}>
             <img src={logo} style={style} alt="bank logo" height="42" width="42"/>
@@ -93,7 +92,7 @@ class JobList extends React.Component {
         rows.push(<JobRow title={job.title} company={job.company} link={job.link} key={job.id} stats={job.stats}/>);
       });
     }
-    var containerStyle = {width: '100%'};
+    var containerStyle = {width: '90%', "margin": "0px auto"};
     return (
       <table style={containerStyle}>
         <tbody>
@@ -127,20 +126,27 @@ class JobFileterTagList extends React.Component {
 export class FilterableJobTable extends React.Component {
   render() {
     var currentPage = this.props.currentPage || 1;
+    var style = {'text-align': 'center'};
     return (
       <div>
         <SearchBar />
         <JobFileterTagList />
         <JobList jobs={this.props.jobs}/>
-        <Pagination
-          bsSize="small"
-          items={this.props.totalPages}
-          activePage={currentPage}
-          onSelect={this.props.handleSelect}/>
-        <Pager>
-          <Pager.Item href="#">Previous</Pager.Item>
-          <Pager.Item href="#">Next</Pager.Item>
-        </Pager>
+        <div style={style}>
+          <Pagination
+            prev
+            next
+            first
+            last
+            ellipsis
+            boundaryLinks
+            bsSize="small"
+            items={this.props.totalPages}
+            activePage={currentPage}
+            maxButtons={5}
+            onSelect={this.props.handleSelect}
+          />
+        </div>
       </div>
     );
   }
