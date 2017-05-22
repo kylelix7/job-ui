@@ -34,7 +34,7 @@ export class JobPieChart extends React.Component {
       };
       return (
         <div className="pie-chart-wrapper">
-          <h4 style={style}>{this.props.company}</h4>
+          <h4 style={style}>{this.props.company} Top 10 skills</h4>
           <PieChart style={style} width={800} height={400}>
             <Legend/>
             <Tooltip />
@@ -50,7 +50,7 @@ export class JobPieChart extends React.Component {
         </div>
       );
     } else {
-      return <p>No data to be shown.</p>;
+      return <div><h4 style={style}>{this.props.company} Top 10 skills</h4> <p>No data</p></div>;
     }
   }
 }

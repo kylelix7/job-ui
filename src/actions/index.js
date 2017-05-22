@@ -13,14 +13,13 @@ function convertObjectElementsToArray(obj) {
   // need to get the actual object this way. monggose
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
-      key = key.replace(/-/g , ".")
+      key = key.replace(/-/g , ".");
       arr.push({name: key, value: obj[key]});
     }
   }
 
   return arr;
-};
-
+}
 export const requestJobs = filter => ({
   type: REQUEST_JOBS,
   filter
@@ -71,7 +70,7 @@ export const fetchJobs = filter => dispatch => {
           }
           if (a.value < b.value)
             return 1;
-          else (a.value > b.value)
+          else (a.value > b.value);
             return -1;
         });
         jobs[i].stats = jobStats;
