@@ -15,7 +15,6 @@ import {
 
 import DropdownButton from "react-bootstrap/lib/DropdownButton";
 import MenuItem from "react-bootstrap/lib/MenuItem";
-import {fetchStats} from "../actions";
 
 import {scaleOrdinal, schemeCategory10} from "d3-scale";
 
@@ -65,21 +64,25 @@ export class JobChart extends React.Component {
       var style = {
         "margin": "auto",
         "width": "50%",
-        "padding": "10px"
+        "padding": "40px 40px 40px 40px"
+      };
+      var margin = {
+        "margin": "40px 40px 40px 40px"
       };
       return (
         <div>
-          <DropdownButton title="Banks" id="bg-nested-dropdown">
-            <MenuItem eventKey="All" onSelect={this.props.onSelectorClick}>All</MenuItem>
-            <MenuItem eventKey="RBC" onSelect={this.props.onSelectorClick}>RBC</MenuItem>
-            <MenuItem eventKey="TD" onSelect={this.props.onSelectorClick}>TD</MenuItem>
-            <MenuItem eventKey="Scotiabank" onSelect={this.props.onSelectorClick}>Scotiabank</MenuItem>
-            <MenuItem eventKey="BMO" onSelect={this.props.onSelectorClick}>BMO</MenuItem>
-          </DropdownButton>
-
+          <div style={margin}>
+            <DropdownButton title="Banks" id="bg-nested-dropdown">
+              <MenuItem eventKey="All" onSelect={this.props.onSelectorClick}>All</MenuItem>
+              <MenuItem eventKey="RBC" onSelect={this.props.onSelectorClick}>RBC</MenuItem>
+              <MenuItem eventKey="TD" onSelect={this.props.onSelectorClick}>TD</MenuItem>
+              <MenuItem eventKey="Scotiabank" onSelect={this.props.onSelectorClick}>Scotiabank</MenuItem>
+              <MenuItem eventKey="BMO" onSelect={this.props.onSelectorClick}>BMO</MenuItem>
+            </DropdownButton>
+          </div>
           <h4 style={style}>{this.props.company} - Top 10 skills</h4>
           <ResponsiveContainer width='80%' aspect={16.0 / 9.0}>
-            <PieChart style={style} width={800} height={400}>
+            <PieChart width={800} height={400}>
               <Legend/>
               <Tooltip />
               <Pie label legendType="line" paddingAngle={5}>
