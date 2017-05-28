@@ -31,10 +31,10 @@ class App extends React.Component {
     const {dispatch} = this.props;
     dispatch(fetchJobs({}));
     dispatch(fetchStats());
-    dispatch(fetchStats({'company': 'TD'}));
-    dispatch(fetchStats({'company': 'BMO'}));
-    dispatch(fetchStats({'company': 'RBC'}));
-    dispatch(fetchStats({'company': 'Scotiabank'}));
+    // dispatch(fetchStats({'company': 'TD'}));
+    // dispatch(fetchStats({'company': 'BMO'}));
+    // dispatch(fetchStats({'company': 'RBC'}));
+    // dispatch(fetchStats({'company': 'Scotiabank'}));
   }
 
   componentWillReceiveProps(nextProps) {
