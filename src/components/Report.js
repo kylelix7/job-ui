@@ -1,5 +1,17 @@
 import React from "react";
-import {Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, Tooltip, XAxis, YAxis, ResponsiveContainer} from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
+} from "recharts";
 import {scaleOrdinal, schemeCategory10} from "d3-scale";
 
 export class JobPieChart extends React.Component {
@@ -22,8 +34,9 @@ export class JobPieChart extends React.Component {
         return -1;
       return 0;
     });
-    var top10 = stats.slice(0, limit);
-    return top10;
+    var top = stats.slice(0, limit);
+    top = top.map((entry, value) => ({name: entry.name.replace(/-/g, '.'), value: entry.value}))
+    return top;
   }
 
   renderCustomizedLabel({cx, cy, midAngle, innerRadius, outerRadius, percent, index}) {
@@ -52,24 +65,24 @@ export class JobPieChart extends React.Component {
       return (
         <div>
           <h4 style={style}>{this.props.company} - Top 10 skills</h4>
-        <ResponsiveContainer width='80%' aspect={16.0/9.0}>
+          <ResponsiveContainer width='80%' aspect={16.0 / 9.0}>
+            <PieChart style={style} width={800} height={400}>
+              <Legend/>
+              <Tooltip />
+              <Pie label legendType="line" paddingAngle={5}>
+                {
+                  top10.map((entry, index) => (
+                    <Cell key={`slice-${index}`} name={entry.name} value={entry.value}
+                          fill={colors[index % 10]}/>
+                  ))
+                }
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
 
-          <PieChart style={style} width={800} height={400}>
-            <Legend/>
-            <Tooltip />
-            <Pie label legendType="line" paddingAngle={5}>
-              {
-                top10.map((entry, index) => (
-                  <Cell key={`slice-${index}`} name={entry.name} value={entry.value}
-                        fill={colors[index % 10]}/>
-                ))
-              }
-            </Pie>
-          </PieChart>
 
-        </ResponsiveContainer>
           <h4 style={style}>{this.props.company} - Top 20 skills</h4>
-          <ResponsiveContainer width='80%' aspect={16.0/9.0}>
+          <ResponsiveContainer width='80%' aspect={16.0 / 9.0}>
             <BarChart data={top20}
                       margin={{top: 5, right: 30, left: 20, bottom: 5}}>
               <XAxis dataKey="name"/>
