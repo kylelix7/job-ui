@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {fetchJobs, fetchStats, selectPage} from "../actions";
 import {connect} from "react-redux";
 import {FilterableJobTable} from "../components/Job";
-import {JobPieChart} from "../components/Report";
+import {JobChart} from "../components/Report";
 import {Tab, Tabs} from "react-bootstrap";
 
 
@@ -28,6 +28,8 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    console.log('componentDidMount');
+    console.log(this.props);
     const {dispatch} = this.props;
     dispatch(fetchJobs({}));
     dispatch(fetchStats());
@@ -67,7 +69,7 @@ class App extends React.Component {
                                 currentPage={this.props.currentPage} />
           </Tab>
           <Tab eventKey={2} title="Report" >
-            <JobPieChart stats={this.props.stats} company={this.props.reportCompany}/>
+            <JobChart stats={this.props.stats} company={this.props.reportCompany} onSelectorClick={this.props.onSelectorClick} />
             {/*<table style={containerStyle}>*/}
               {/*<tbody>*/}
               {/*<tr>*/}
@@ -104,4 +106,14 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    dispatch: dispatch,
+    onSelectorClick: (reportCompany) => {
+      dispatch(fetchStats({'company': reportCompany}));
+    }
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

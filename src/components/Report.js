@@ -12,12 +12,18 @@ import {
   XAxis,
   YAxis
 } from "recharts";
+
+import DropdownButton from "react-bootstrap/lib/DropdownButton";
+import MenuItem from "react-bootstrap/lib/MenuItem";
+import {fetchStats} from "../actions";
+
 import {scaleOrdinal, schemeCategory10} from "d3-scale";
 
-export class JobPieChart extends React.Component {
+export class JobChart extends React.Component {
   constructor(props) {
     super(props);
     this.findTop = this.findTop.bind(this);
+    this.clickItem = this.clickItem.bind(this);
   }
 
   findTop(stats, limit) {
@@ -52,6 +58,12 @@ export class JobPieChart extends React.Component {
     );
   };
 
+  clickItem(eventKey) {
+    console.log("0000000");
+    console.log(this.props);
+    console.log(eventKey);
+    this.props.onSelectorClick(eventKey);
+  }
   render() {
     var top10 = this.findTop(this.props.stats);
     var top20 = this.findTop(this.props.stats, 20);
@@ -64,6 +76,14 @@ export class JobPieChart extends React.Component {
       };
       return (
         <div>
+          <DropdownButton title="Banks" id="bg-nested-dropdown">
+            <MenuItem eventKey="All" onSelect={this.clickItem}>All</MenuItem>
+            <MenuItem eventKey="RBC" onSelect={this.clickItem}>RBC</MenuItem>
+            <MenuItem eventKey="TD" onSelect={this.clickItem}>TD</MenuItem>
+            <MenuItem eventKey="Scotiabank" onSelect={this.clickItem}>Scotiabank</MenuItem>
+            <MenuItem eventKey="BMO" onSelect={this.clickItem}>BMO</MenuItem>
+          </DropdownButton>
+
           <h4 style={style}>{this.props.company} - Top 10 skills</h4>
           <ResponsiveContainer width='80%' aspect={16.0 / 9.0}>
             <PieChart style={style} width={800} height={400}>
