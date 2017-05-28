@@ -14,19 +14,22 @@ const reducer = (state, action) => {
       var currentPage = action.currentPage || 1;
       return {...state, currentPage: currentPage};
     case RECEIVE_STATS:
-      if (!action.company) {
-        return {...state, stats: action.stats};
-      }
-      switch (action.company) {
-        case "TD":
-          return {...state, td_stats: action.stats};
-        case "RBC":
-          return {...state, rbc_stats: action.stats};
-        case "Scotiabank":
-          return {...state, scotiabank_stats: action.stats};
-        case "BMO":
-          return {...state, bmo_stats: action.stats};
-      }
+      var company = action.company || "All Banks";
+
+      return {...state, stats: action.stats, reportCompany: company};
+      // if (!action.company) {
+      //   return {...state, stats: action.stats};
+      // }
+      // switch (action.company) {
+      //   case "TD":
+      //     return {...state, td_stats: action.stats};
+      //   case "RBC":
+      //     return {...state, rbc_stats: action.stats};
+      //   case "Scotiabank":
+      //     return {...state, scotiabank_stats: action.stats};
+      //   case "BMO":
+      //     return {...state, bmo_stats: action.stats};
+      // }
     default:
       return {...state};
   }

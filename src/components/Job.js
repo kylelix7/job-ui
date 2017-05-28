@@ -6,7 +6,6 @@ import rbc_logo from "../assets/RBC.jpg";
 import Button from "react-bootstrap/lib/Button";
 import Pagination from "react-bootstrap/lib/Pagination";
 import {skills} from "../constants/constants";
-import * as moment from 'moment';
 
 export const JOBS = [
   {title: "software developer", company: "TD", id: "TD1"},

@@ -64,22 +64,22 @@ class App extends React.Component {
             <FilterableJobTable jobs={this.props.jobs}
                                 totalPages={this.props.totalPages}
                                 handleSelect={this.handleSelect}
-                                currentPage={this.props.currentPage}/>
+                                currentPage={this.props.currentPage} />
           </Tab>
           <Tab eventKey={2} title="Report" >
-            <JobPieChart stats={this.props.stats} company="All"/>
-            <table style={containerStyle}>
-              <tbody>
-              <tr>
-                <td><JobPieChart stats={this.props.rbc_stats} company="RBC"/></td>
-                <td><JobPieChart stats={this.props.td_stats} company="TD"/></td>
-              </tr>
-              <tr>
-                <td><JobPieChart stats={this.props.scotiabank_stats} company="Scotiabank"/></td>
-                <td><JobPieChart stats={this.props.bmo_stats} company="BMO"/></td>
-              </tr>
-              </tbody>
-            </table>
+            <JobPieChart stats={this.props.stats} company={this.props.reportCompany}/>
+            {/*<table style={containerStyle}>*/}
+              {/*<tbody>*/}
+              {/*<tr>*/}
+                {/*<td><JobPieChart stats={this.props.rbc_stats} company="RBC"/></td>*/}
+                {/*<td><JobPieChart stats={this.props.td_stats} company="TD"/></td>*/}
+              {/*</tr>*/}
+              {/*<tr>*/}
+                {/*<td><JobPieChart stats={this.props.scotiabank_stats} company="Scotiabank"/></td>*/}
+                {/*<td><JobPieChart stats={this.props.bmo_stats} company="BMO"/></td>*/}
+              {/*</tr>*/}
+              {/*</tbody>*/}
+            {/*</table>*/}
           </Tab>
         </Tabs>
       </div>
@@ -94,10 +94,11 @@ const mapStateToProps = state => {
     totalPages: state.reducer.totalPages,
     currentPage: state.reducer.currentPage,
     stats: state.reducer.stats,
-    rbc_stats: state.reducer.rbc_stats,
-    td_stats: state.reducer.td_stats,
-    scotiabank_stats: state.reducer.scotiabank_stats,
-    bmo_stats: state.reducer.bmo_stats,
+    reportCompany: state.reducer.reportCompany,
+    // rbc_stats: state.reducer.rbc_stats,
+    // td_stats: state.reducer.td_stats,
+    // scotiabank_stats: state.reducer.scotiabank_stats,
+    // bmo_stats: state.reducer.bmo_stats,
     isFetching: false,
     keyword: ''
   };

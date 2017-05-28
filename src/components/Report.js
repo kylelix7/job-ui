@@ -23,6 +23,18 @@ export class JobPieChart extends React.Component {
     return top10;
   }
 
+  renderCustomizedLabel({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const RADIAN = Math.PI / 180;
+    const x  = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy  + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} 	dominantBaseline="central">
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
   render() {
     var top10 = this.findTop10(this.props.stats);
     if (top10) {
@@ -34,11 +46,11 @@ export class JobPieChart extends React.Component {
       };
       return (
         <div className="pie-chart-wrapper">
-          <h4 style={style}>{this.props.company} Top 10 skills</h4>
+          <h4 style={style}>{this.props.company} - Top 10 skills</h4>
           <PieChart style={style} width={800} height={400}>
             <Legend/>
             <Tooltip />
-            <Pie cx={200} cy={200} outerRadius={80} innerRadius={40} label>
+            <Pie cx={200} cy={200} outerRadius={80} innerRadius={40} label legendType="line">
               {
                 top10.map((entry, index) => (
                   <Cell key={`slice-${index}`} name={entry.name} value={entry.value}
