@@ -6,6 +6,7 @@ import rbc_logo from "../assets/RBC.jpg";
 import Button from "react-bootstrap/lib/Button";
 import Pagination from "react-bootstrap/lib/Pagination";
 import {skills} from "../constants/constants";
+import * as moment from 'moment';
 
 export const JOBS = [
   {title: "software developer", company: "TD", id: "TD1"},
@@ -51,6 +52,10 @@ class JobRow extends React.Component {
     var statsDiv = null;
     var titleStyle = {'float': 'left'};
 
+    if(this.props.post_date) {
+      var date = new Date(this.props.post_date);
+      var str = date.toISOString().substring(0, 10);
+    }
 
     if (stats && stats.length > 2) {
       var buttons = [];
@@ -76,6 +81,7 @@ class JobRow extends React.Component {
         <td >
           <div style={titleStyle}>
             <img src={logo} style={style} alt="bank logo" height="42" width="42"/>
+            <span style={style}>{str ? str : ""}</span>
             <a href={this.props.link} target="_blank">{this.props.title}</a>
           </div>
           { statsDiv }
@@ -89,10 +95,12 @@ class JobList extends React.Component {
     var rows = [];
     if (this.props.jobs) {
       this.props.jobs.forEach(function (job) {
-        rows.push(<JobRow title={job.title} company={job.company} link={job.link} key={job.id} stats={job.stats}/>);
+        rows.push(<JobRow title={job.title} company={job.company}
+                          link={job.link} key={job.id} stats={job.stats}
+                          post_date={job.post_date}/>);
       });
     }
-    var containerStyle = {width: '90%', "margin": "0px auto"};
+    var containerStyle = {width: '100%', "margin": "20px auto"};
     return (
       <table style={containerStyle}>
         <tbody>
@@ -127,10 +135,10 @@ export class FilterableJobTable extends React.Component {
   render() {
     var currentPage = this.props.currentPage || 1;
     var style = {'text-align': 'center'};
+    //<SearchBar />
+    //<JobFileterTagList />
     return (
       <div>
-        <SearchBar />
-        <JobFileterTagList />
         <JobList jobs={this.props.jobs}/>
         <div style={style}>
           <Pagination

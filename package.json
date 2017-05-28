@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "d3": "^4.8.0",
+    "moment": "^2.18.1",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",

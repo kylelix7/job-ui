@@ -59,14 +59,14 @@ class App extends React.Component {
     var containerStyle = {width: '100%'};
     return (
       <div className="panel panel-default" >
-        <Tabs defaultActiveKey={1} id="nav-tab">
-          <Tab eventKey={1} title="Jobs and Skills">
+        <Tabs defaultActiveKey={1} id="nav-tab" style={style}>
+          <Tab eventKey={1} title="Jobs and Skills" >
             <FilterableJobTable jobs={this.props.jobs}
                                 totalPages={this.props.totalPages}
                                 handleSelect={this.handleSelect}
                                 currentPage={this.props.currentPage}/>
           </Tab>
-          <Tab eventKey={2} title="Report">
+          <Tab eventKey={2} title="Report" >
             <JobPieChart stats={this.props.stats} company="All"/>
             <table style={containerStyle}>
               <tbody>
