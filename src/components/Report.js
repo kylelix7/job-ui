@@ -23,7 +23,6 @@ export class JobChart extends React.Component {
   constructor(props) {
     super(props);
     this.findTop = this.findTop.bind(this);
-    this.clickItem = this.clickItem.bind(this);
   }
 
   findTop(stats, limit) {
@@ -58,12 +57,6 @@ export class JobChart extends React.Component {
     );
   };
 
-  clickItem(eventKey) {
-    console.log("0000000");
-    console.log(this.props);
-    console.log(eventKey);
-    this.props.onSelectorClick(eventKey);
-  }
   render() {
     var top10 = this.findTop(this.props.stats);
     var top20 = this.findTop(this.props.stats, 20);
@@ -77,11 +70,11 @@ export class JobChart extends React.Component {
       return (
         <div>
           <DropdownButton title="Banks" id="bg-nested-dropdown">
-            <MenuItem eventKey="All" onSelect={this.clickItem}>All</MenuItem>
-            <MenuItem eventKey="RBC" onSelect={this.clickItem}>RBC</MenuItem>
-            <MenuItem eventKey="TD" onSelect={this.clickItem}>TD</MenuItem>
-            <MenuItem eventKey="Scotiabank" onSelect={this.clickItem}>Scotiabank</MenuItem>
-            <MenuItem eventKey="BMO" onSelect={this.clickItem}>BMO</MenuItem>
+            <MenuItem eventKey="All" onSelect={this.props.onSelectorClick}>All</MenuItem>
+            <MenuItem eventKey="RBC" onSelect={this.props.onSelectorClick}>RBC</MenuItem>
+            <MenuItem eventKey="TD" onSelect={this.props.onSelectorClick}>TD</MenuItem>
+            <MenuItem eventKey="Scotiabank" onSelect={this.props.onSelectorClick}>Scotiabank</MenuItem>
+            <MenuItem eventKey="BMO" onSelect={this.props.onSelectorClick}>BMO</MenuItem>
           </DropdownButton>
 
           <h4 style={style}>{this.props.company} - Top 10 skills</h4>

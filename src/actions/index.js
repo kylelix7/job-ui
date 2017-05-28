@@ -13,7 +13,7 @@ function convertObjectElementsToArray(obj) {
   // need to get the actual object this way. monggose
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
-      var newKey = key.replace(/-/g , "."); // handle any key containing the dot
+      var newKey = key.replace(/-/g, "."); // handle any key containing the dot
       arr.push({name: newKey, value: obj[key]});
     }
   }
@@ -54,24 +54,24 @@ export const fetchJobs = filter => dispatch => {
       var jobs = json.jobs;
       for (var i = 0; i < jobs.length; i++) {
         var jobStats = jobs[i].stats;
-        if(jobs[i].stats && Array.isArray(jobs[i].stats) && jobs[i].stats.length > 0) {
+        if (jobs[i].stats && Array.isArray(jobs[i].stats) && jobs[i].stats.length > 0) {
           jobStats = jobs[i].stats[0];
         }
         jobStats = convertObjectElementsToArray(jobStats);
         jobStats.sort(function (a, b) {
-          if(a.value === b.value) {
+          if (a.value === b.value) {
             return 0;
           }
-          if(!a.value) {
+          if (!a.value) {
             return 1;
           }
-          if(!b.value) {
+          if (!b.value) {
             return -1;
           }
           if (a.value < b.value)
             return 1;
           else (a.value > b.value);
-            return -1;
+          return -1;
         });
         jobs[i].stats = jobStats;
       }
@@ -82,7 +82,7 @@ export const fetchJobs = filter => dispatch => {
 export const fetchStats = filter => dispatch => {
   var url = "http://localhost:8080/api/stats";
   var company = null;
-  if (filter && filter.company) {
+  if (filter && filter.company && isCompanyValid(filter.company)) {
     company = filter.company;
     url = url + '?company=' + company;
   }
@@ -93,3 +93,7 @@ export const fetchStats = filter => dispatch => {
     .then(response => response.json())
     .then(json => dispatch(receiveStats(json, company)));
 };
+
+const isCompanyValid = company => {
+  return (company === "TD" || company === "RBC" || company === "BMO" || company === "Scotiabank");
+}
