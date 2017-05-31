@@ -42,8 +42,11 @@ export const selectPage = (currentPage) => ({
   currentPage: currentPage
 });
 
+const hostName() {
+
+}
 export const fetchJobs = filter => dispatch => {
-  var url = "http://localhost:8080/api/jobs";
+  var url = "/api/jobs";
   if (filter.currentPage) {
     url = url + '?page=' + (parseInt(filter.currentPage, 10) - 1);
   }
@@ -80,7 +83,7 @@ export const fetchJobs = filter => dispatch => {
 };
 
 export const fetchStats = filter => dispatch => {
-  var url = "http://localhost:8080/api/stats";
+  var url = "/api/stats";
   var company = null;
   if (filter && filter.company && isCompanyValid(filter.company)) {
     company = filter.company;
