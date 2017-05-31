@@ -42,9 +42,6 @@ export const selectPage = (currentPage) => ({
   currentPage: currentPage
 });
 
-const hostName() {
-
-}
 export const fetchJobs = filter => dispatch => {
   var url = "/api/jobs";
   if (filter.currentPage) {
