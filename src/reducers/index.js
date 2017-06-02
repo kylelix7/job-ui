@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
 
-import {RECEIVE_JOBS, RECEIVE_STATS, REQUEST_JOBS, SELECT_PAGE} from "../actions";
+import {RECEIVE_JOBS, RECEIVE_STATS, REQUEST_JOBS, SELECT_PAGE, RECEIVE_JOB_COUNT} from "../actions";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -15,21 +15,9 @@ const reducer = (state, action) => {
       return {...state, currentPage: currentPage};
     case RECEIVE_STATS:
       var company = action.company || "All Banks";
-
       return {...state, stats: action.stats, reportCompany: company};
-      // if (!action.company) {
-      //   return {...state, stats: action.stats};
-      // }
-      // switch (action.company) {
-      //   case "TD":
-      //     return {...state, td_stats: action.stats};
-      //   case "RBC":
-      //     return {...state, rbc_stats: action.stats};
-      //   case "Scotiabank":
-      //     return {...state, scotiabank_stats: action.stats};
-      //   case "BMO":
-      //     return {...state, bmo_stats: action.stats};
-      // }
+    case RECEIVE_JOB_COUNT:
+      return {...state, jobCount: action.jobCount};
     default:
       return {...state};
   }

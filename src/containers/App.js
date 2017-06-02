@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {fetchJobs, fetchStats, selectPage} from "../actions";
+import {fetchJobs, fetchStats, fetchJobCount, selectPage} from "../actions";
 import {connect} from "react-redux";
 import {FilterableJobTable} from "../components/Job";
 import {JobChart} from "../components/Report";
@@ -14,7 +14,6 @@ class App extends React.Component {
   }
 
   static propTypes = {
-    jobs: PropTypes.array,
     isFetching: PropTypes.bool,
     keyword: PropTypes.string,
     activePage: PropTypes.number,
@@ -24,19 +23,15 @@ class App extends React.Component {
     rbc_stats: PropTypes.array,
     td_stats: PropTypes.array,
     scotiabank_stats: PropTypes.array,
-    bmo_stats: PropTypes.array
+    bmo_stats: PropTypes.array,
+    jobCount: PropTypes.number
   };
 
   componentDidMount() {
-    console.log('componentDidMount');
-    console.log(this.props);
     const {dispatch} = this.props;
     dispatch(fetchJobs({}));
     dispatch(fetchStats());
-    // dispatch(fetchStats({'company': 'TD'}));
-    // dispatch(fetchStats({'company': 'BMO'}));
-    // dispatch(fetchStats({'company': 'RBC'}));
-    // dispatch(fetchStats({'company': 'Scotiabank'}));
+    dispatch(fetchJobCount());
   }
 
   componentWillReceiveProps(nextProps) {
@@ -69,19 +64,9 @@ class App extends React.Component {
                                 currentPage={this.props.currentPage} />
           </Tab>
           <Tab eventKey={2} title="Report" >
-            <JobChart stats={this.props.stats} company={this.props.reportCompany} onSelectorClick={this.props.onSelectorClick} />
-            {/*<table style={containerStyle}>*/}
-              {/*<tbody>*/}
-              {/*<tr>*/}
-                {/*<td><JobPieChart stats={this.props.rbc_stats} company="RBC"/></td>*/}
-                {/*<td><JobPieChart stats={this.props.td_stats} company="TD"/></td>*/}
-              {/*</tr>*/}
-              {/*<tr>*/}
-                {/*<td><JobPieChart stats={this.props.scotiabank_stats} company="Scotiabank"/></td>*/}
-                {/*<td><JobPieChart stats={this.props.bmo_stats} company="BMO"/></td>*/}
-              {/*</tr>*/}
-              {/*</tbody>*/}
-            {/*</table>*/}
+            <JobChart stats={this.props.stats} company={this.props.reportCompany}
+                      onSelectorClick={this.props.onSelectorClick}
+                      jobCount={this.props.jobCount} />
           </Tab>
         </Tabs>
       </div>
@@ -97,10 +82,7 @@ const mapStateToProps = state => {
     currentPage: state.reducer.currentPage,
     stats: state.reducer.stats,
     reportCompany: state.reducer.reportCompany,
-    // rbc_stats: state.reducer.rbc_stats,
-    // td_stats: state.reducer.td_stats,
-    // scotiabank_stats: state.reducer.scotiabank_stats,
-    // bmo_stats: state.reducer.bmo_stats,
+    jobCount: state.reducer.jobCount,
     isFetching: false,
     keyword: ''
   };
@@ -112,6 +94,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     dispatch: dispatch,
     onSelectorClick: (reportCompany) => {
       dispatch(fetchStats({'company': reportCompany}));
+      dispatch(fetchJobCount({'company': reportCompany}));
     }
   }
 };

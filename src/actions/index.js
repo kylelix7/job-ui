@@ -3,7 +3,7 @@ export const REQUEST_JOBS = 'REQUEST_JOBS';
 export const RECEIVE_JOBS = 'RECEIVE_JOBS';
 export const SELECT_PAGE = 'SELECT_PAGE';
 export const RECEIVE_STATS = 'RECEIVE_STATS';
-
+export const RECEIVE_JOB_COUNT = 'RECEIVE_JOB_COUNT';
 
 function convertObjectElementsToArray(obj) {
   if (!obj) {
@@ -35,6 +35,11 @@ export const receiveStats = (stats, company) => ({
   type: RECEIVE_STATS,
   stats: stats,
   company: company
+});
+
+export const receiveJobCount = (jobCount) => ({
+  type: RECEIVE_JOB_COUNT,
+  jobCount: jobCount
 });
 
 export const selectPage = (currentPage) => ({
@@ -92,6 +97,21 @@ export const fetchStats = filter => dispatch => {
   })
     .then(response => response.json())
     .then(json => dispatch(receiveStats(json, company)));
+};
+
+export const fetchJobCount = filter => dispatch => {
+  var url = "/api/job_count";
+  var company = null;
+  if (filter && filter.company && isCompanyValid(filter.company)) {
+    company = filter.company;
+    url = url + '?bank=' + company;
+  }
+
+  return fetch(url, {
+    method: 'GET'
+  })
+    .then(response => response.json())
+    .then(json => dispatch(receiveJobCount(json.count)));
 };
 
 const isCompanyValid = company => {

@@ -80,7 +80,7 @@ export class JobChart extends React.Component {
               <MenuItem eventKey="BMO" onSelect={this.props.onSelectorClick}>BMO</MenuItem>
             </DropdownButton>
           </div>
-          <h4 style={style}>{this.props.company} - Top 10 skills</h4>
+          <h4 style={style}> Top 10 skills - {this.props.company} - {this.props.jobCount} Jobs</h4>
           <ResponsiveContainer width='80%' aspect={16.0 / 9.0}>
             <PieChart width={800} height={400}>
               <Legend/>
@@ -96,8 +96,8 @@ export class JobChart extends React.Component {
             </PieChart>
           </ResponsiveContainer>
 
-
-          <h4 style={style}>{this.props.company} - Top 20 skills</h4>
+        <br/>
+          <h4 style={style}>Top 20 skills - {this.props.company} - {this.props.jobCount} Jobs</h4>
           <ResponsiveContainer width='80%' aspect={16.0 / 9.0}>
             <BarChart data={top20}
                       margin={{top: 5, right: 30, left: 20, bottom: 5}}>
