@@ -15,8 +15,9 @@ import {
 
 import DropdownButton from "react-bootstrap/lib/DropdownButton";
 import MenuItem from "react-bootstrap/lib/MenuItem";
-
 import {scaleOrdinal, schemeCategory10} from "d3-scale";
+import {skills} from "../constants/constants";
+import Button from "react-bootstrap/lib/Button";
 
 export class JobChart extends React.Component {
   constructor(props) {
@@ -59,6 +60,7 @@ export class JobChart extends React.Component {
   render() {
     var top10 = this.findTop(this.props.stats);
     var top20 = this.findTop(this.props.stats, 20);
+    var adStyle = {"border" : "none"};
     if (top10) {
       const colors = scaleOrdinal(schemeCategory10).range();
       var style = {
@@ -72,7 +74,7 @@ export class JobChart extends React.Component {
       return (
         <div>
           <div style={margin}>
-            <DropdownButton title="Banks" id="bg-nested-dropdown">
+            <DropdownButton title="Banks" id="bg-nested-dropdown" >
               <MenuItem eventKey="All" onSelect={this.props.onSelectorClick}>All</MenuItem>
               <MenuItem eventKey="RBC" onSelect={this.props.onSelectorClick}>RBC</MenuItem>
               <MenuItem eventKey="TD" onSelect={this.props.onSelectorClick}>TD</MenuItem>
@@ -108,10 +110,23 @@ export class JobChart extends React.Component {
               <Bar dataKey="value" fill="#8884d8"/>
             </BarChart>
           </ResponsiveContainer>
+          {/*<JobFileterTagList />*/}
+          <iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=15&p=13&l=ur1&category=amazonhomepage&f=ifr&linkID=6547e981fab62e4011e90c3657e6904e&t=kylelix7-20&tracking_id=kylelix7-20" width="468" height="60" scrolling="no" border="0" marginwidth="0" style={adStyle} frameborder="0"></iframe>
         </div>
       );
     } else {
       return <div><h4 style={style}>{this.props.company} Top 10 skills</h4> <p>No data</p></div>;
     }
+  }
+}
+
+
+class JobFileterTagList extends React.Component {
+  render() {
+    var all_buttons = skills.map(function (str) {
+      var style = {margin: '5px'};
+      return <Button key={str} className='btn-xs' style={style}> {str} </Button>;
+    });
+    return <div> {all_buttons} </div>
   }
 }

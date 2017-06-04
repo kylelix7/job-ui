@@ -5,7 +5,6 @@ import scotia_logo from "../assets/Scotiabank.jpg";
 import rbc_logo from "../assets/RBC.jpg";
 import Button from "react-bootstrap/lib/Button";
 import Pagination from "react-bootstrap/lib/Pagination";
-import {skills} from "../constants/constants";
 
 export const JOBS = [
   {title: "software developer", company: "TD", id: "TD1"},
@@ -120,22 +119,12 @@ class SearchBar extends React.Component {
   }
 }
 
-class JobFileterTagList extends React.Component {
-  render() {
-    var all_buttons = skills.map(function (str) {
-      var style = {margin: '5px'};
-      return <Button key={str} className='btn-xs' style={style}> {str} </Button>;
-    });
-    return <div> {all_buttons} </div>
-  }
-}
-
 export class FilterableJobTable extends React.Component {
   render() {
     var currentPage = this.props.currentPage || 1;
     var style = {'text-align': 'center'};
     //<SearchBar />
-    //<JobFileterTagList />
+
     return (
       <div>
         <JobList jobs={this.props.jobs}/>
