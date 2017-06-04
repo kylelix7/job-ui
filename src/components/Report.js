@@ -111,7 +111,7 @@ export class JobChart extends React.Component {
             </BarChart>
           </ResponsiveContainer>
           {/*<JobFileterTagList />*/}
-          <iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=15&p=13&l=ur1&category=amazonhomepage&f=ifr&linkID=6547e981fab62e4011e90c3657e6904e&t=kylelix7-20&tracking_id=kylelix7-20" width="468" height="60" scrolling="no" border="0" marginwidth="0" style={adStyle} frameborder="0"></iframe>
+          <iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=15&p=48&l=ur1&category=techweek&banner=0W3WF23M0NHF244NPPR2&f=ifr&linkID=7c99865b989b4d0b22623b00babfb0b0&t=kylelix7-20&tracking_id=kylelix7-20" width="728" height="90" scrolling="no" border="0" marginwidth="0" style={adStyle} frameborder="0"></iframe>
         </div>
       );
     } else {
