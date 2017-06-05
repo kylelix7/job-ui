@@ -4,6 +4,7 @@ export const RECEIVE_JOBS = 'RECEIVE_JOBS';
 export const SELECT_PAGE = 'SELECT_PAGE';
 export const RECEIVE_STATS = 'RECEIVE_STATS';
 export const RECEIVE_JOB_COUNT = 'RECEIVE_JOB_COUNT';
+export const RECEIVE_SINGLE_BANK_STATS = 'RECEIVE_SINGLE_BANK_STATS';
 
 function convertObjectElementsToArray(obj) {
   if (!obj) {
@@ -33,6 +34,12 @@ export const receiveJobs = (jobs, count) => ({
 
 export const receiveStats = (stats, company) => ({
   type: RECEIVE_STATS,
+  stats: stats,
+  company: company
+});
+
+export const receiveSingleBankStats = (stats, company) => ({
+  type: RECEIVE_SINGLE_BANK_STATS,
   stats: stats,
   company: company
 });
@@ -84,6 +91,10 @@ export const fetchJobs = filter => dispatch => {
     });
 };
 
+const isCompanyValid = company => {
+  return (company === "TD" || company === "RBC" || company === "BMO" || company === "Scotiabank");
+}
+
 export const fetchStats = filter => dispatch => {
   var url = "/api/stats";
   var company = null;
@@ -97,6 +108,22 @@ export const fetchStats = filter => dispatch => {
   })
     .then(response => response.json())
     .then(json => dispatch(receiveStats(json, company)));
+};
+
+
+export const fetchSingleBankStats = filter => dispatch => {
+  var url = "/api/stats";
+  var company = null;
+  if (filter && filter.company && isCompanyValid(filter.company)) {
+    company = filter.company;
+    url = url + '?company=' + company;
+  }
+
+  return fetch(url, {
+    method: 'GET'
+  })
+    .then(response => response.json())
+    .then(json => dispatch(receiveSingleBankStats(json, company)));
 };
 
 export const fetchJobCount = filter => dispatch => {
@@ -113,7 +140,3 @@ export const fetchJobCount = filter => dispatch => {
     .then(response => response.json())
     .then(json => dispatch(receiveJobCount(json.count)));
 };
-
-const isCompanyValid = company => {
-  return (company === "TD" || company === "RBC" || company === "BMO" || company === "Scotiabank");
-}

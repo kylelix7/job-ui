@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {fetchJobs, fetchStats, fetchJobCount, selectPage} from "../actions";
+import {fetchJobs, fetchStats, fetchJobCount, selectPage, fetchSingleBankStats} from "../actions";
 import {connect} from "react-redux";
 import {FilterableJobTable} from "../components/Job";
 import {JobChart} from "../components/Report";
@@ -32,6 +32,10 @@ class App extends React.Component {
     dispatch(fetchJobs({}));
     dispatch(fetchStats());
     dispatch(fetchJobCount());
+    dispatch(fetchSingleBankStats({'company': 'TD'}));
+    dispatch(fetchSingleBankStats({'company': 'BMO'}));
+    dispatch(fetchSingleBankStats({'company': 'RBC'}));
+    dispatch(fetchSingleBankStats({'company': 'Scotiabank'}));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,7 +57,7 @@ class App extends React.Component {
     var style = {
       "margin": "20px 60px 20px 60px"
     };
-    var containerStyle = {width: '100%'};
+    var containerStyle = {'top': '0', 'border-width': '0 0 1px'};
     return (
       <div className="panel panel-default" >
         <Tabs defaultActiveKey={1} id="nav-tab" style={style}>
@@ -65,8 +69,16 @@ class App extends React.Component {
           </Tab>
           <Tab eventKey={2} title="Report" >
             <JobChart stats={this.props.stats} company={this.props.reportCompany}
+                      rbc_stats={this.props.rbc_stats}
+                      td_stats={this.props.td_stats}
+                      scotiabank_stats={this.props.scotiabank_stats}
+                      bmo_stats={this.props.bmo_stats}
                       onSelectorClick={this.props.onSelectorClick}
                       jobCount={this.props.jobCount} />
+          </Tab>
+
+          <Tab eventKey={3} title="Download free data">
+            <h3>Data is exported from mongodb</h3>
           </Tab>
         </Tabs>
       </div>
@@ -83,6 +95,10 @@ const mapStateToProps = state => {
     stats: state.reducer.stats,
     reportCompany: state.reducer.reportCompany,
     jobCount: state.reducer.jobCount,
+    rbc_stats: state.reducer.rbc_stats,
+    td_stats: state.reducer.td_stats,
+    scotiabank_stats: state.reducer.scotiabank_stats,
+    bmo_stats: state.reducer.bmo_stats,
     isFetching: false,
     keyword: ''
   };
