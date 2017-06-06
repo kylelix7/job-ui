@@ -57,11 +57,21 @@ class App extends React.Component {
     var style = {
       "margin": "20px 60px 20px 60px"
     };
+    var jumbotronStyle = {"margin": "20px 0px 20px 0px"};
+
     var containerStyle = {'top': '0', 'border-width': '0 0 1px'};
     return (
       <div className="panel panel-default" >
         <Tabs defaultActiveKey={1} id="nav-tab" style={style} responsive>
           <Tab eventKey={1} title="Jobs and Skills" >
+            <div className="jumbotron" style={jumbotronStyle}>
+              <h4>This website is dedicated to provide intuition of what hot IT skills are mentioned in technical jobs in major Canada's banks.</h4>
+              <ul>
+                <li>The job page briefly dispaly top 3 mentioned skills and the number they are mentioned in each jobs.</li>
+                <li>The report shows most mentioned skills in all jobs. There are also breakdowns by banks.</li>
+              </ul>
+
+            </div>
             <FilterableJobTable jobs={this.props.jobs}
                                 totalPages={this.props.totalPages}
                                 handleSelect={this.handleSelect}
