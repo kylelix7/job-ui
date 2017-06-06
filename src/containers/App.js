@@ -67,8 +67,8 @@ class App extends React.Component {
             <div className="jumbotron" style={jumbotronStyle}>
               <h4>This website is dedicated to provide intuition of what hot IT skills are mentioned in technical jobs in major Canada's banks.</h4>
               <ul>
-                <li>The job page briefly dispaly top 3 mentioned skills and the number they are mentioned in each jobs.</li>
-                <li>The report shows most mentioned skills in all jobs. There are also breakdowns by banks.</li>
+                <li>The job page briefly displays top 3 mentioned skills and the number of which in each job</li>
+                <li>The report shows most most mentioned skills in all jobs. Breakdown figures by banks are available</li>
               </ul>
 
             </div>
