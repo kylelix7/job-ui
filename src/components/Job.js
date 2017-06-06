@@ -100,7 +100,7 @@ class JobList extends React.Component {
     }
     var containerStyle = {width: '100%', "margin": "20px auto"};
     return (
-      <table style={containerStyle}>
+      <table style={containerStyle} responsive>
         <tbody>
         {rows}
         </tbody>

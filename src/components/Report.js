@@ -64,7 +64,7 @@ export class JobChart extends React.Component {
         var showName = item.name;
         var name = showName.replace(/\./g, '-');
 
-        var sRBC = skillsInTD.find(x=> x && x.name===name);
+        var sRBC = skillsInRBC.find(x=> x && x.name===name);
         var sRBCv = 0;
         if(sRBC) {sRBCv = sRBC.value;}
         var sTD = skillsInTD.find(x=> x && x.name===name);
@@ -168,7 +168,7 @@ export class JobChart extends React.Component {
             </BarChart>
           </ResponsiveContainer>
           {/*<JobFileterTagList />*/}
-          <iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=15&p=48&l=ur1&category=techweek&banner=0W3WF23M0NHF244NPPR2&f=ifr&linkID=7c99865b989b4d0b22623b00babfb0b0&t=kylelix7-20&tracking_id=kylelix7-20" width="728" height="90" scrolling="no" border="0" marginwidth="0" style={adStyle} frameborder="0"></iframe>
+          <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=41a39bd8-d6a8-4b74-be95-54275b73fc94"></script>
         </div>
       );
     } else {

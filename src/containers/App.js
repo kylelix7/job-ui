@@ -60,7 +60,7 @@ class App extends React.Component {
     var containerStyle = {'top': '0', 'border-width': '0 0 1px'};
     return (
       <div className="panel panel-default" >
-        <Tabs defaultActiveKey={1} id="nav-tab" style={style}>
+        <Tabs defaultActiveKey={1} id="nav-tab" style={style} responsive>
           <Tab eventKey={1} title="Jobs and Skills" >
             <FilterableJobTable jobs={this.props.jobs}
                                 totalPages={this.props.totalPages}
@@ -77,9 +77,10 @@ class App extends React.Component {
                       jobCount={this.props.jobCount} />
           </Tab>
 
-          <Tab eventKey={3} title="Download free data">
+       {/*   <Tab eventKey={3} title="Download free data">
             <h3>Data is exported from mongodb</h3>
-          </Tab>
+            <a href="/public/jobs.json"> Download </a>
+          </Tab>*/}
         </Tabs>
       </div>
     );
