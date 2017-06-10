@@ -77,7 +77,7 @@ class App extends React.Component {
                                 handleSelect={this.handleSelect}
                                 currentPage={this.props.currentPage} />
           </Tab>
-          <Tab eventKey={2} title="Report" >
+          <Tab eventKey={2} title="Skill Report" >
             <JobChart stats={this.props.stats} company={this.props.reportCompany}
                       rbc_stats={this.props.rbc_stats}
                       td_stats={this.props.td_stats}
@@ -87,10 +87,11 @@ class App extends React.Component {
                       jobCount={this.props.jobCount} />
           </Tab>
 
-       {/*   <Tab eventKey={3} title="Download free data">
+          <Tab eventKey={3} title="Download free data">
             <h3>Data is exported from mongodb</h3>
-            <a href="/public/jobs.json"> Download </a>
-          </Tab>*/}
+            <a href="/jobs.json" download> Download free data </a>
+            <a target="_blank" href="https://www.amazon.ca/b?_encoding=UTF8&tag=kylelix7-20&linkCode=ur2&linkId=d8651c0323f63f34b3e8caa6870d6385&camp=15121&creative=330641&node=939082">Dev books</a><img src="//ir-ca.amazon-adsystem.com/e/ir?t=kylelix7-20&l=ur2&o=15" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+          </Tab>
         </Tabs>
       </div>
     );
