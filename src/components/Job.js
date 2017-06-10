@@ -30,9 +30,9 @@ class JobRow extends React.Component {
   }
 
   getStyle(value) {
-    var styleRed = {"backgroundColor": "#FF0000", "color": "#FFFFFF"};
-    var styleBlue = {"backgroundColor": "#0000cd", "color": "#FFFFFF"};
-    var styleGreen = {"backgroundColor": "#006400", "color": "#FFFFFF"};
+    var styleRed = {"backgroundColor": "#FF0000", "color": "#000000"};
+    var styleBlue = {"backgroundColor": "#FF6E00", "color": "#000000"};
+    var styleGreen = {"backgroundColor": "#FFFa00", "color": "#000000"};
     if (value >= 5) {
       return styleRed;
     } else if (value >= 2) {
