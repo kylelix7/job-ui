@@ -90,7 +90,8 @@ class App extends React.Component {
           <Tab eventKey={3} title="Download free data">
             <h3>Data is exported from mongodb</h3>
             <a href="/jobs.json" download> Download free data </a>
-            <a target="_blank" href="https://www.amazon.ca/b?_encoding=UTF8&tag=kylelix7-20&linkCode=ur2&linkId=d8651c0323f63f34b3e8caa6870d6385&camp=15121&creative=330641&node=939082">Dev books</a><img src="//ir-ca.amazon-adsystem.com/e/ir?t=kylelix7-20&l=ur2&o=15" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+            <br />
+            <a target="_blank" href="https://www.amazon.ca/b?_encoding=UTF8&tag=kylelix7-20&linkCode=ur2&linkId=9e22de2d19391de42252452a781ab321&camp=15121&creative=330641&node=939082">Developer books</a><img src="//ir-ca.amazon-adsystem.com/e/ir?t=kylelix7-20&l=ur2&o=15" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />            
           </Tab>
         </Tabs>
       </div>
