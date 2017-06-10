@@ -59,7 +59,12 @@ export const fetchJobs = filter => dispatch => {
   if (filter.currentPage) {
     url = url + '?page=' + (parseInt(filter.currentPage, 10) - 1);
   }
-  return fetch(url)
+  return fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  })
     .then(response => response.json())
     .then(json => {
       // convert the stats json object to array for sorting
@@ -104,7 +109,11 @@ export const fetchStats = filter => dispatch => {
   }
 
   return fetch(url, {
-    method: 'GET'
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+
   })
     .then(response => response.json())
     .then(json => dispatch(receiveStats(json, company)));
@@ -119,9 +128,14 @@ export const fetchSingleBankStats = filter => dispatch => {
     url = url + '?company=' + company;
   }
 
-  return fetch(url, {
-    method: 'GET'
-  })
+  return fetch(url,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+
+    })
     .then(response => response.json())
     .then(json => dispatch(receiveSingleBankStats(json, company)));
 };
@@ -135,7 +149,10 @@ export const fetchJobCount = filter => dispatch => {
   }
 
   return fetch(url, {
-    method: 'GET'
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
   })
     .then(response => response.json())
     .then(json => dispatch(receiveJobCount(json.count)));
