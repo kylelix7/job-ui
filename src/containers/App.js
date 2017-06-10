@@ -60,6 +60,7 @@ class App extends React.Component {
     var jumbotronStyle = {"margin": "20px 0px 20px 0px"};
 
     var containerStyle = {'top': '0', 'border-width': '0 0 1px'};
+    var bkStyle = {"border": "none !important; margin:0px !important;"};
     return (
       <div className="panel panel-default" >
         <Tabs defaultActiveKey={1} id="nav-tab" style={style} responsive>
@@ -90,8 +91,8 @@ class App extends React.Component {
           <Tab eventKey={3} title="Download free data">
             <h3>Data is exported from mongodb</h3>
             <a href="/jobs.json" download> Download free data </a>
-            <br />
-            <a target="_blank" href="https://www.amazon.ca/b?_encoding=UTF8&tag=kylelix7-20&linkCode=ur2&linkId=9e22de2d19391de42252452a781ab321&camp=15121&creative=330641&node=939082">Developer books</a><img src="//ir-ca.amazon-adsystem.com/e/ir?t=kylelix7-20&l=ur2&o=15" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />            
+            <h3> Dev books from Amazon.ca </h3>
+            <a target="_blank" href="https://www.amazon.ca/b?_encoding=UTF8&tag=kylelix7-20&linkCode=ur2&linkId=9e22de2d19391de42252452a781ab321&camp=15121&creative=330641&node=939082">Developer books</a><img src="//ir-ca.amazon-adsystem.com/e/ir?t=kylelix7-20&l=ur2&o=15" width="1" height="1" border="0" alt="" style={bkStyle} />
           </Tab>
         </Tabs>
       </div>
